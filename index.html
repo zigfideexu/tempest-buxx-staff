@@ -26,9 +26,15 @@ body{
   position:fixed;
   inset:0;
   background:url("https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif") center/cover no-repeat;
-  filter:blur(18px) brightness(0.35);
-  transform:scale(1.1);
+  filter:blur(20px) brightness(0.35);
+  transform:scale(1.15);
   z-index:0;
+  animation:slowZoom 12s infinite alternate;
+}
+
+@keyframes slowZoom{
+  from{transform:scale(1.1);}
+  to{transform:scale(1.2);}
 }
 
 .overlay{
@@ -51,26 +57,28 @@ body{
 
 .entry-box{
   text-align:center;
-  padding:25px;
-  border-radius:16px;
-  background:rgba(10,18,40,0.7);
-  border:1px solid rgba(120,160,255,0.2);
+  animation:entryPop 1s ease;
+}
+
+@keyframes entryPop{
+  from{transform:scale(0.6);opacity:0;}
+  to{transform:scale(1);opacity:1;}
 }
 
 .entry-box img{
-  width:120px;
-  border-radius:12px;
-  margin-bottom:10px;
+  width:150px;
+  filter:drop-shadow(0 0 25px rgba(80,160,255,0.9));
 }
 
 .entry-box button{
-  padding:10px 18px;
+  margin-top:12px;
+  padding:10px 20px;
   border:none;
   border-radius:10px;
   background:linear-gradient(90deg,#2f7bff,#4da3ff);
   color:white;
-  cursor:pointer;
   font-weight:600;
+  cursor:pointer;
 }
 
 /* MAIN */
@@ -84,21 +92,40 @@ body{
   flex-direction:column;
   gap:12px;
   padding:18px;
+  animation:fadeIn 1s ease;
 }
 
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+/* CARD */
 .card{
   width:100%;
   max-width:520px;
   max-height:72vh;
   overflow-y:auto;
   background:rgba(10,18,40,0.72);
-  border:1px solid rgba(120,160,255,0.18);
+  border:1px solid rgba(120,160,255,0.2);
   border-radius:18px;
   padding:20px;
   backdrop-filter:blur(14px);
+  box-shadow:0 0 40px rgba(0,120,255,0.15);
 }
 
-/* FORM */
+/* FORM HEADER GIF */
+.form-header{
+  text-align:center;
+  margin-bottom:10px;
+}
+
+.form-header img{
+  width:90px;
+  filter:drop-shadow(0 0 20px rgba(80,160,255,0.9));
+}
+
+/* INPUTS */
 label{
   display:block;
   margin-top:12px;
@@ -110,9 +137,16 @@ input,textarea{
   margin-top:6px;
   padding:11px;
   border-radius:10px;
-  border:1px solid rgba(120,160,255,0.18);
+  border:1px solid rgba(120,160,255,0.2);
   background:rgba(255,255,255,0.04);
   color:white;
+  outline:none;
+  transition:0.2s;
+}
+
+input:focus,textarea:focus{
+  border-color:#4da3ff;
+  box-shadow:0 0 10px rgba(77,163,255,0.3);
 }
 
 button.submit{
@@ -125,6 +159,11 @@ button.submit{
   color:white;
   font-weight:600;
   cursor:pointer;
+  transition:0.2s;
+}
+
+button.submit:hover{
+  transform:scale(1.02);
 }
 
 /* PEZINHO */
@@ -140,20 +179,14 @@ button.submit{
   padding:12px;
   border-radius:14px;
   background:rgba(10,18,40,0.6);
-  border:1px solid rgba(120,160,255,0.18);
+  border:1px solid rgba(120,160,255,0.2);
   font-size:11px;
 }
 
-.benefit h3{color:#7fb2ff;font-size:12px;margin-bottom:4px;}
-
-/* LOGO CANTO */
-.corner-logo{
-  position:fixed;
-  bottom:10px;
-  right:10px;
-  width:55px;
-  opacity:0.7;
-  z-index:10;
+.benefit h3{
+  color:#7fb2ff;
+  font-size:12px;
+  margin-bottom:4px;
 }
 
 /* CUTSCENE */
@@ -171,7 +204,7 @@ button.submit{
 #cutscene img{
   width:240px;
   animation:zoom 2.5s ease forwards;
-  filter:drop-shadow(0 0 25px rgba(80,160,255,0.9));
+  filter:drop-shadow(0 0 30px rgba(80,160,255,1));
 }
 
 @keyframes zoom{
@@ -185,7 +218,7 @@ button.submit{
   font-size:14px;
   color:#7fb2ff;
   letter-spacing:3px;
-  text-shadow:0 0 12px rgba(80,160,255,0.9);
+  text-shadow:0 0 15px rgba(80,160,255,1);
 }
 </style>
 </head>
@@ -199,6 +232,7 @@ button.submit{
 <div id="entry">
   <div class="entry-box">
     <img src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif">
+    <br>
     <button onclick="enter()">Entrar</button>
   </div>
 </div>
@@ -208,44 +242,29 @@ button.submit{
 
   <div class="card">
 
+    <div class="form-header">
+      <img src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif">
+    </div>
+
     <form id="form">
 
       <label>Nome</label><input required>
       <label>Usuário do Discord</label><input required>
       <label>Idade</label><input type="number" required>
+      <label>Tempo no Discord</label><input>
 
-      <label>Há quanto tempo usa Discord?</label>
-      <input>
+      <label>Experiência como staff</label><textarea></textarea>
+      <label>Servidores anteriores</label><textarea></textarea>
+      <label>Cargo anterior</label><input>
 
-      <label>Já trabalhou como staff antes?</label>
-      <textarea rows="3"></textarea>
+      <label>Por que saiu?</label><textarea></textarea>
+      <label>Tempo livre</label><input>
 
-      <label>Se sim, em quais servidores?</label>
-      <textarea rows="3"></textarea>
+      <label>Cliente irritado?</label><textarea></textarea>
+      <label>Por que entrar?</label><textarea></textarea>
+      <label>Como ajudaria?</label><textarea></textarea>
 
-      <label>Qual era seu cargo?</label>
-      <input>
-
-      <label>Por que deixou de ser staff?</label>
-      <textarea rows="3"></textarea>
-
-      <label>Por que saiu do servidor?</label>
-      <textarea rows="3"></textarea>
-
-      <label>Tempo livre por dia</label>
-      <input>
-
-      <label>Como lidaria com cliente irritado?</label>
-      <textarea rows="3"></textarea>
-
-      <label>Por que quer entrar na Tempest Buxx?</label>
-      <textarea rows="3"></textarea>
-
-      <label>O que faria para ajudar a loja?</label>
-      <textarea rows="3"></textarea>
-
-      <label>Fale sobre você</label>
-      <textarea rows="4"></textarea>
+      <label>Sobre você</label><textarea></textarea>
 
       <button class="submit" type="submit">Enviar candidatura</button>
 
@@ -253,11 +272,10 @@ button.submit{
 
   </div>
 
-  <!-- PEZINHO -->
   <div class="benefits-footer">
     <div class="benefit">
       <h3>Ambiente</h3>
-      Organização e equipe.
+      Equipe organizada.
     </div>
 
     <div class="benefit">
@@ -273,18 +291,15 @@ button.submit{
 
 </div>
 
-<!-- LOGO -->
-<img class="corner-logo" src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif">
-
 <!-- CUTSCENE -->
 <div id="cutscene">
   <img src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/LOGO.gif">
   <div class="zig">FEITO POR ZIG</div>
 </div>
 
-<!-- SONS CORRIGIDOS -->
+<!-- SONS -->
 <audio id="startSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a6c8c5.mp3"></audio>
-<audio id="clickSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_0a1f5d3c6b.mp3"></audio>
+<audio id="clickSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a6c8c5.mp3"></audio>
 
 <script>
 let unlocked=false;
