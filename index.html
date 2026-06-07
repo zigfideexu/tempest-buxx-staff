@@ -256,13 +256,7 @@ document.getElementById("form").addEventListener("submit", async (e)=>{
     content: "📩 Nova candidatura recebida!",
     embeds: [{
       color: 0x4da3ff,
-
-      author: {
-        name: "Tempest Buxx • Recrutamento",
-        icon_url: "https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/LOGO.gif"
-      },
-
-      title: "📩 Nova candidatura recebida",
+      title: "Tempest Buxx • Recrutamento",
 
       image: {
         url: "https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif"
@@ -270,7 +264,7 @@ document.getElementById("form").addEventListener("submit", async (e)=>{
 
       fields: [
         {
-          name: "👤 Identificação",
+          name: "Identificação",
           value:
 `Nome: ${safe(inputs[0]?.value)}
 Discord: ${safe(inputs[1]?.value)}
@@ -278,24 +272,24 @@ Idade: ${safe(inputs[2]?.value)}
 Tempo: ${safe(inputs[3]?.value)}`
         },
         {
-          name: "🧠 Experiência",
+          name: "Experiência",
           value:
 `Staff: ${safe(texts[0]?.value)}
 Servidores: ${safe(texts[1]?.value)}
 Cargo: ${safe(inputs[4]?.value)}`
         },
         {
-          name: "📌 Histórico",
+          name: "Histórico",
           value:
 `Saiu staff: ${safe(texts[2]?.value)}
 Saiu server: ${safe(texts[3]?.value)}`
         },
         {
-          name: "⚡ Situação",
+          name: "Situação",
           value: safe(texts[4]?.value)
         },
         {
-          name: "🚀 Motivação",
+          name: "Motivação",
           value:
 `Entrar: ${safe(texts[5]?.value)}
 Crescimento: ${safe(texts[6]?.value)}
@@ -311,24 +305,14 @@ Sobre: ${safe(texts[7]?.value)}`
     }]
   };
 
-  try {
-    const res = await fetch(WEBHOOK_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
+  await fetch(WEBHOOK_URL, {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify(payload)
+  });
 
-    if (!res.ok) {
-      alert("Erro ao enviar webhook");
-      return;
-    }
-
-    document.getElementById("cutscene").style.display="flex";
-    setTimeout(()=>location.reload(),2500);
-
-  } catch (err) {
-    alert("Erro de conexão");
-  }
+  document.getElementById("cutscene").style.display="flex";
+  setTimeout(()=>location.reload(),2500);
 });
 </script>
 
