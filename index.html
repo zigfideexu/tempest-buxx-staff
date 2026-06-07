@@ -22,7 +22,7 @@ canvas {
   z-index: 0;
 }
 
-/* tela de entrada */
+/* INTRO */
 .intro {
   position: fixed;
   inset: 0;
@@ -30,10 +30,10 @@ canvas {
   justify-content: center;
   align-items: center;
   background: #050814;
-  z-index: 5;
+  z-index: 10;
   flex-direction: column;
-  animation: fadeOut 1s ease forwards;
-  animation-delay: 1.2s;
+  animation: introOut 1s ease forwards;
+  animation-delay: 1.5s;
 }
 
 .intro img {
@@ -48,36 +48,66 @@ canvas {
   to { transform: scale(1); opacity: 1; }
 }
 
-@keyframes fadeOut {
+@keyframes introOut {
   to { opacity: 0; visibility: hidden; }
 }
 
-/* conteúdo */
+/* FORM ENTRADA */
 .container {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding: 20px;
   opacity: 0;
-  animation: showForm 0.8s ease forwards;
-  animation-delay: 1.4s;
+  animation: show 1s ease forwards;
+  animation-delay: 2s;
 }
 
-@keyframes showForm {
+@keyframes show {
   to { opacity: 1; }
 }
 
 .card {
-  width: 420px;
-  background: rgba(10, 18, 40, 0.72);
-  border: 1px solid rgba(90, 140, 255, 0.25);
+  width: 430px;
+  background: rgba(10, 18, 40, 0.75);
   border-radius: 18px;
   padding: 22px;
-  box-shadow: 0 0 25px rgba(0,120,255,0.15);
+  border: 1px solid rgba(90, 140, 255, 0.25);
+  box-shadow: 0 0 25px rgba(0,120,255,0.2);
   backdrop-filter: blur(10px);
+}
+
+/* GIF sobe pro topo (efeito transição) */
+.logo {
+  width: 110px;
+  display: block;
+  margin: 0 auto;
+  animation: moveUp 1.2s ease forwards;
+  animation-delay: 1.4s;
+  opacity: 0;
+}
+
+@keyframes moveUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* título FORMULÁRIO caindo */
+.drop-title {
+  text-align: center;
+  font-size: 18px;
+  letter-spacing: 3px;
+  color: #8fb6ff;
+  animation: drop 1s ease forwards;
+  animation-delay: 1.6s;
+  opacity: 0;
+}
+
+@keyframes drop {
+  0% { transform: translateY(-40px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
 }
 
 h1 {
@@ -88,13 +118,24 @@ h1 {
 .subtitle {
   text-align: center;
   opacity: 0.7;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
+}
+
+/* símbolos */
+.symbol {
+  color: #4fa3ff;
+  margin-right: 6px;
+  filter: drop-shadow(0 0 5px rgba(0,120,255,0.5));
 }
 
 label {
   font-size: 13px;
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
 }
 
+/* inputs */
 input, textarea {
   width: 100%;
   padding: 10px;
@@ -111,6 +152,7 @@ input:focus, textarea:focus {
   box-shadow: 0 0 12px rgba(0,140,255,0.3);
 }
 
+/* botão */
 button {
   width: 100%;
   padding: 12px;
@@ -132,7 +174,7 @@ button:active {
 
 <canvas id="particles"></canvas>
 
-<!-- INTRO ANIMATION -->
+<!-- INTRO -->
 <div class="intro">
   <img src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif">
 </div>
@@ -141,25 +183,33 @@ button:active {
 <div class="container">
   <div class="card">
 
+    <img class="logo"
+      src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif">
+
+    <div class="drop-title">FORMULÁRIO</div>
+
     <h1>Tempest Buxx</h1>
     <p class="subtitle">Candidatura para Staff</p>
 
     <form>
 
-      <label>Nome</label>
-      <input type="text" required>
+      <label><span class="symbol">💠</span>Qual seu nome?</label>
+      <input type="text">
 
-      <label>Discord</label>
-      <input type="text" required>
+      <label><span class="symbol">💠</span>Qual seu Discord?</label>
+      <input type="text">
 
-      <label>Idade</label>
-      <input type="number" required>
+      <label><span class="symbol">❓</span>Qual sua idade?</label>
+      <input type="number">
 
-      <label>Experiência</label>
-      <textarea rows="3"></textarea>
+      <label><span class="symbol">💠</span>Experiência no Discord?</label>
+      <textarea rows="2"></textarea>
 
-      <label>Por que entrar?</label>
-      <textarea rows="3"></textarea>
+      <label><span class="symbol">❓</span>Já foi staff?</label>
+      <textarea rows="2"></textarea>
+
+      <label><span class="symbol">💠</span>Por que quer entrar?</label>
+      <textarea rows="2"></textarea>
 
       <button type="submit">Enviar</button>
 
@@ -177,11 +227,11 @@ canvas.height = window.innerHeight;
 
 let particles = [];
 
-for (let i = 0; i < 55; i++) {
+for (let i = 0; i < 60; i++) {
   particles.push({
     x: Math.random() * canvas.width,
     y: Math.random() * canvas.height,
-    r: Math.random() * 1.8,
+    r: Math.random() * 1.5,
     dx: (Math.random() - 0.5) * 0.4,
     dy: (Math.random() - 0.5) * 0.4
   });
@@ -211,4 +261,4 @@ animate();
 </script>
 
 </body>
-</html>    
+</html>
