@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tempest Buxx - Staff</title>
+<title>Tempest Buxx Form</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -37,62 +37,68 @@ body{
   to{transform:scale(1.15) translateY(-10px);}
 }
 
-/* overlay */
 .overlay{
   position:fixed;
   inset:0;
-  background:radial-gradient(circle at top,#0b1a3a88,#050814 70%);
+  background:radial-gradient(circle at top,#0a1a3a88,#050814 70%);
   z-index:1;
 }
 
-/* particles */
 canvas{
   position:fixed;
   inset:0;
   z-index:2;
 }
 
-/* INTRO */
-.intro{
+/* GATE (ENTRY SCREEN) */
+#gate{
   position:fixed;
   inset:0;
+  background:#050814;
   display:flex;
   justify-content:center;
   align-items:center;
-  background:#050814;
-  z-index:10;
-  animation:fadeOut 1.2s ease forwards;
-  animation-delay:1.5s;
+  z-index:999;
 }
 
-.intro img{
+.gate-box{
+  text-align:center;
+}
+
+.gate-box img{
   width:140px;
   border-radius:12px;
   filter:drop-shadow(0 0 18px rgba(90,160,255,0.8));
-  animation:zoom 1s ease;
+  margin-bottom:10px;
 }
 
-@keyframes zoom{
-  from{transform:scale(0.6);opacity:0;}
-  to{transform:scale(1);opacity:1;}
+.gate-box button{
+  padding:12px 20px;
+  border:none;
+  border-radius:10px;
+  background:linear-gradient(90deg,#2f7bff,#4da3ff);
+  color:white;
+  font-weight:600;
+  cursor:pointer;
 }
 
-@keyframes fadeOut{
-  to{opacity:0;visibility:hidden;}
+.gate-box p{
+  font-size:12px;
+  opacity:0.6;
+  margin-top:8px;
 }
 
 /* MAIN */
 .wrapper{
   position:relative;
   z-index:3;
-  display:flex;
+  display:none;
   justify-content:center;
   align-items:center;
   height:100vh;
   padding:18px;
 }
 
-/* CARD */
 .card{
   width:100%;
   max-width:480px;
@@ -106,7 +112,6 @@ canvas{
   box-shadow:0 0 40px rgba(0,120,255,0.12);
 }
 
-/* HEADER */
 .header{
   text-align:center;
 }
@@ -117,33 +122,17 @@ canvas{
   filter:drop-shadow(0 0 14px rgba(90,160,255,0.8));
 }
 
-h1{
-  font-size:18px;
-}
+h1{font-size:18px;}
+.sub{font-size:12px;opacity:0.6;}
 
-.sub{
-  font-size:12px;
-  opacity:0.6;
-}
-
-/* TITLE */
 .drop{
   text-align:center;
   margin:10px 0;
   font-size:12px;
   letter-spacing:4px;
   color:#7fb2ff;
-  animation:drop 1s ease forwards;
-  opacity:0;
-  animation-delay:1.3s;
 }
 
-@keyframes drop{
-  from{transform:translateY(-20px);opacity:0;}
-  to{transform:translateY(0);opacity:1;}
-}
-
-/* LABEL */
 label{
   display:block;
   margin-top:12px;
@@ -151,7 +140,6 @@ label{
   opacity:0.9;
 }
 
-/* INPUT */
 input,textarea{
   width:100%;
   margin-top:6px;
@@ -171,8 +159,7 @@ input:focus,textarea:focus{
   border-color:rgba(90,160,255,0.6);
 }
 
-/* BUTTON */
-button{
+button.submit{
   width:100%;
   margin-top:14px;
   padding:12px;
@@ -184,9 +171,7 @@ button{
   cursor:pointer;
 }
 
-button:active{
-  transform:scale(0.97);
-}
+/* PARTICLES */
 </style>
 </head>
 
@@ -197,18 +182,27 @@ button:active{
 
 <canvas id="particles"></canvas>
 
-<!-- SOM MAIS SUAVE -->
-<audio id="clickSound">
-  <source src="https://assets.mixkit.co/sfx/preview/mixkit-soft-click-1116.mp3" type="audio/mpeg">
+<!-- 🔊 SOM -->
+<audio id="startSound">
+  <source src="https://assets.mixkit.co/sfx/preview/mixkit-game-start-voice-off-2868.mp3">
 </audio>
 
-<!-- INTRO -->
-<div class="intro">
-  <img src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif">
+<audio id="clickSound">
+  <source src="https://assets.mixkit.co/sfx/preview/mixkit-soft-click-1116.mp3">
+</audio>
+
+<!-- ENTRY -->
+<div id="gate">
+  <div class="gate-box">
+    <img src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif">
+    <button onclick="enterSite()">Entrar</button>
+    <p>Toque para entrar</p>
+  </div>
 </div>
 
 <!-- MAIN -->
-<div class="wrapper">
+<div class="wrapper" id="main">
+
   <div class="card">
 
     <div class="header">
@@ -260,15 +254,39 @@ button:active{
       <label>Fale sobre você</label>
       <textarea rows="3"></textarea>
 
-      <button type="button">Enviar candidatura</button>
+      <button class="submit" type="button">Enviar candidatura</button>
 
     </form>
 
   </div>
+
 </div>
 
 <script>
-/* particles */
+/* ENTER SITE */
+function enterSite(){
+  const s=document.getElementById("startSound");
+  s.volume=0.6;
+  s.play();
+
+  document.getElementById("gate").style.opacity="0";
+
+  setTimeout(()=>{
+    document.getElementById("gate").style.display="none";
+    document.getElementById("main").style.display="flex";
+  },800);
+}
+
+/* CLICK SOUND */
+const click=document.getElementById("clickSound");
+document.querySelectorAll("input,textarea").forEach(el=>{
+  el.addEventListener("focus",()=>{
+    click.currentTime=0;
+    click.play().catch(()=>{});
+  });
+});
+
+/* PARTICLES */
 const c=document.getElementById("particles");
 const x=c.getContext("2d");
 
@@ -280,7 +298,7 @@ for(let i=0;i<50;i++){
   p.push({
     x:Math.random()*c.width,
     y:Math.random()*c.height,
-    r:Math.random()*1.1,
+    r:Math.random()*1.2,
     dx:(Math.random()-0.5)*0.3,
     dy:(Math.random()-0.5)*0.3
   });
@@ -305,15 +323,6 @@ function anim(){
   requestAnimationFrame(anim);
 }
 anim();
-
-/* soft sound */
-const sound=document.getElementById("clickSound");
-document.querySelectorAll("input,textarea").forEach(el=>{
-  el.addEventListener("focus",()=>{
-    sound.currentTime=0;
-    sound.play().catch(()=>{});
-  });
-});
 </script>
 
 </body>
