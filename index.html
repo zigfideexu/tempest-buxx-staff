@@ -253,11 +253,83 @@ document.getElementById("form").addEventListener("submit", async (e)=>{
   const payload = {
   content: "📩 **Nova candidatura recebida!**",
   embeds: [{
-    title: "💠 Tempest Buxx • Recrutamento",
-    color: 0x4da3ff,
-    thumbnail: {
-      url: "https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/LOGO.gif"
+  color: 0x4da3ff,
+
+  author: {
+    name: "Tempest Buxx • Sistema de Recrutamento",
+    icon_url: "https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/LOGO.gif"
+  },
+
+  title: "📩 Nova candidatura recebida",
+  description: "```md\n# Dados do candidato abaixo\n```",
+
+  thumbnail: {
+    url: "https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/LOGO.gif"
+  },
+
+  image: {
+    url: "https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif"
+  },
+
+  fields: [
+
+    {
+      name: "👤 IDENTIFICAÇÃO",
+      value:
+`**Nome:** ${inputs[0].value || "N/A"}
+**Discord:** ${inputs[1].value || "N/A"}
+**Idade:** ${inputs[2].value || "N/A"}
+**Tempo no Discord:** ${inputs[3].value || "N/A"}`,
+      inline: false
     },
+
+    {
+      name: "🧠 EXPERIÊNCIA",
+      value:
+`**Já foi staff:** ${texts[0].value || "N/A"}
+**Servidores:** ${texts[1].value || "N/A"}
+**Cargo anterior:** ${inputs[4].value || "N/A"}`,
+      inline: false
+    },
+
+    {
+      name: "📌 HISTÓRICO",
+      value:
+`**Motivo saída staff:** ${texts[2].value || "N/A"}
+**Motivo saída servidor:** ${texts[3].value || "N/A"}`,
+      inline: false
+    },
+
+    {
+      name: "⏳ DISPONIBILIDADE",
+      value: `**Tempo livre:** ${inputs[5].value || "N/A"}`,
+      inline: true
+    },
+
+    {
+      name: "⚡ SITUAÇÕES",
+      value:
+`**Cliente irritado:** ${texts[4].value || "N/A"}`,
+      inline: false
+    },
+
+    {
+      name: "🚀 MOTIVAÇÃO",
+      value:
+`**Por que entrar:** ${texts[5].value || "N/A"}
+**Crescimento:** ${texts[6].value || "N/A"}
+**Sobre você:** ${texts[7].value || "N/A"}`,
+      inline: false
+    }
+
+  ],
+
+  footer: {
+    text: "Tempest Buxx • Recrutamento Automático"
+  },
+
+  timestamp: new Date().toISOString()
+}]
 
     fields: [
       {
