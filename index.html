@@ -5,167 +5,188 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tempest Buxx - Staff</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: radial-gradient(circle at top, #070c1a, #050814);
-  color: #d6e4ff;
-  overflow: hidden;
+:root{
+  --bg:#050814;
+  --card:rgba(10,18,40,0.72);
+  --stroke:rgba(120,160,255,0.2);
+  --accent:#4da3ff;
+  --text:#dbe7ff;
 }
 
-/* partículas */
-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 0;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:"Inter",sans-serif;
+}
+
+body{
+  background:radial-gradient(circle at top,#0a1430,var(--bg));
+  overflow:hidden;
+  color:var(--text);
+}
+
+/* PARTICLES */
+canvas{
+  position:fixed;
+  inset:0;
+  z-index:0;
 }
 
 /* INTRO */
-.intro {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #050814;
-  z-index: 10;
-  flex-direction: column;
-  animation: introOut 1s ease forwards;
-  animation-delay: 1.5s;
+.intro{
+  position:fixed;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:var(--bg);
+  z-index:10;
+  flex-direction:column;
+  animation:fadeOut 1.3s ease forwards;
+  animation-delay:1.6s;
 }
 
-.intro img {
-  width: 140px;
-  border-radius: 12px;
-  filter: drop-shadow(0 0 15px rgba(0,140,255,0.8));
-  animation: zoomIn 1s ease;
+.intro img{
+  width:150px;
+  border-radius:12px;
+  filter:drop-shadow(0 0 20px rgba(77,163,255,0.8));
+  animation:zoom 1s ease;
 }
 
-@keyframes zoomIn {
-  from { transform: scale(0.6); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+@keyframes zoom{
+  from{transform:scale(0.6);opacity:0;}
+  to{transform:scale(1);opacity:1;}
 }
 
-@keyframes introOut {
-  to { opacity: 0; visibility: hidden; }
+@keyframes fadeOut{
+  to{opacity:0;visibility:hidden;}
 }
 
-/* FORM ENTRADA */
-.container {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  opacity: 0;
-  animation: show 1s ease forwards;
-  animation-delay: 2s;
+/* MAIN */
+.wrapper{
+  position:relative;
+  z-index:2;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+  opacity:0;
+  animation:show 1s ease forwards;
+  animation-delay:2s;
 }
 
-@keyframes show {
-  to { opacity: 1; }
+@keyframes show{
+  to{opacity:1;}
 }
 
-.card {
-  width: 430px;
-  background: rgba(10, 18, 40, 0.75);
-  border-radius: 18px;
-  padding: 22px;
-  border: 1px solid rgba(90, 140, 255, 0.25);
-  box-shadow: 0 0 25px rgba(0,120,255,0.2);
-  backdrop-filter: blur(10px);
+/* CARD */
+.card{
+  width:460px;
+  background:var(--card);
+  border:1px solid var(--stroke);
+  border-radius:18px;
+  padding:22px;
+  backdrop-filter:blur(14px);
+  box-shadow:0 0 40px rgba(0,120,255,0.15);
 }
 
-/* GIF sobe pro topo (efeito transição) */
-.logo {
-  width: 110px;
-  display: block;
-  margin: 0 auto;
-  animation: moveUp 1.2s ease forwards;
-  animation-delay: 1.4s;
-  opacity: 0;
+/* HEADER */
+.header{
+  text-align:center;
+  margin-bottom:8px;
 }
 
-@keyframes moveUp {
-  from { transform: translateY(40px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+.logo{
+  width:90px;
+  border-radius:10px;
+  filter:drop-shadow(0 0 14px rgba(77,163,255,0.8));
 }
 
-/* título FORMULÁRIO caindo */
-.drop-title {
-  text-align: center;
-  font-size: 18px;
-  letter-spacing: 3px;
-  color: #8fb6ff;
-  animation: drop 1s ease forwards;
-  animation-delay: 1.6s;
-  opacity: 0;
+h1{
+  font-size:18px;
 }
 
-@keyframes drop {
-  0% { transform: translateY(-40px); opacity: 0; }
-  100% { transform: translateY(0); opacity: 1; }
+.sub{
+  font-size:12px;
+  opacity:0.6;
 }
 
-h1 {
-  text-align: center;
-  margin: 5px 0;
+/* FORM TITLE */
+.drop{
+  text-align:center;
+  margin:10px 0;
+  font-size:13px;
+  letter-spacing:3px;
+  color:#7fb2ff;
+  animation:drop 1s ease forwards;
+  opacity:0;
+  animation-delay:1.7s;
 }
 
-.subtitle {
-  text-align: center;
-  opacity: 0.7;
-  margin-bottom: 10px;
+@keyframes drop{
+  from{transform:translateY(-25px);opacity:0;}
+  to{transform:translateY(0);opacity:1;}
 }
 
-/* símbolos */
-.symbol {
-  color: #4fa3ff;
-  margin-right: 6px;
-  filter: drop-shadow(0 0 5px rgba(0,120,255,0.5));
+/* LABELS */
+label{
+  display:flex;
+  gap:6px;
+  margin-top:12px;
+  font-size:12px;
+  opacity:0.9;
 }
 
-label {
-  font-size: 13px;
-  display: flex;
-  align-items: center;
-  margin-top: 8px;
+.symbol{
+  color:#4da3ff;
 }
 
-/* inputs */
-input, textarea {
-  width: 100%;
-  padding: 10px;
-  margin: 6px 0 12px;
-  border-radius: 10px;
-  border: 1px solid rgba(120,170,255,0.2);
-  background: rgba(255,255,255,0.06);
-  color: white;
-  transition: 0.2s;
+/* INPUTS */
+input,textarea{
+  width:100%;
+  margin-top:6px;
+  padding:10px;
+  border-radius:10px;
+  border:1px solid var(--stroke);
+  background:rgba(255,255,255,0.04);
+  color:white;
+  outline:none;
+  transition:0.2s;
+  font-size:13px;
 }
 
-input:focus, textarea:focus {
-  transform: scale(1.02);
-  box-shadow: 0 0 12px rgba(0,140,255,0.3);
+/* foco premium */
+input:focus,textarea:focus{
+  transform:scale(1.02);
+  border-color:rgba(77,163,255,0.7);
+  box-shadow:0 0 0 3px rgba(77,163,255,0.12);
 }
 
-/* botão */
-button {
-  width: 100%;
-  padding: 12px;
-  border: none;
-  border-radius: 12px;
-  background: linear-gradient(90deg, #1a5cff, #2f7bff);
-  color: white;
-  cursor: pointer;
-  transition: 0.2s;
+/* BUTTON */
+button{
+  width:100%;
+  margin-top:15px;
+  padding:12px;
+  border:none;
+  border-radius:12px;
+  background:linear-gradient(90deg,#2f7bff,#4da3ff);
+  color:white;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.2s;
 }
 
-button:active {
-  transform: scale(0.97);
+button:hover{
+  transform:translateY(-1px);
+  box-shadow:0 10px 25px rgba(77,163,255,0.25);
+}
+
+button:active{
+  transform:scale(0.97);
 }
 </style>
 </head>
@@ -179,39 +200,65 @@ button:active {
   <img src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif">
 </div>
 
-<!-- FORM -->
-<div class="container">
+<!-- SOUND -->
+<audio id="clickSound">
+  <source src="https://www.myinstants.com/media/sounds/mouse-click.mp3" type="audio/mpeg">
+</audio>
+
+<!-- MAIN -->
+<div class="wrapper">
   <div class="card">
 
-    <img class="logo"
-      src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif">
+    <div class="header">
+      <img class="logo" src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif">
+      <h1>Tempest Buxx</h1>
+      <div class="sub">Staff Hiring Panel</div>
+    </div>
 
-    <div class="drop-title">FORMULÁRIO</div>
-
-    <h1>Tempest Buxx</h1>
-    <p class="subtitle">Candidatura para Staff</p>
+    <div class="drop">FORMULÁRIO</div>
 
     <form>
 
-      <label><span class="symbol">💠</span>Qual seu nome?</label>
+      <label><span class="symbol">💠</span>Nome</label>
       <input type="text">
 
-      <label><span class="symbol">💠</span>Qual seu Discord?</label>
+      <label><span class="symbol">💠</span>Usuário do Discord</label>
       <input type="text">
 
-      <label><span class="symbol">❓</span>Qual sua idade?</label>
+      <label><span class="symbol">❓</span>Idade</label>
       <input type="number">
 
-      <label><span class="symbol">💠</span>Experiência no Discord?</label>
+      <label><span class="symbol">💠</span>Há quanto tempo usa Discord?</label>
+      <input type="text">
+
+      <label><span class="symbol">💠</span>Já foi staff antes?</label>
       <textarea rows="2"></textarea>
 
-      <label><span class="symbol">❓</span>Já foi staff?</label>
+      <label><span class="symbol">💠</span>Se sim, onde?</label>
       <textarea rows="2"></textarea>
 
-      <label><span class="symbol">💠</span>Por que quer entrar?</label>
+      <label><span class="symbol">💠</span>Cargo anterior</label>
+      <input type="text">
+
+      <label><span class="symbol">💠</span>Por que saiu?</label>
       <textarea rows="2"></textarea>
 
-      <button type="submit">Enviar</button>
+      <label><span class="symbol">💠</span>Tempo livre diário</label>
+      <input type="text">
+
+      <label><span class="symbol">❓</span>Como lidaria com alguém irritado?</label>
+      <textarea rows="2"></textarea>
+
+      <label><span class="symbol">💠</span>Por que quer entrar na Tempest Buxx?</label>
+      <textarea rows="2"></textarea>
+
+      <label><span class="symbol">💠</span>Como ajudaria o servidor?</label>
+      <textarea rows="2"></textarea>
+
+      <label><span class="symbol">💠</span>Fale sobre você</label>
+      <textarea rows="3"></textarea>
+
+      <button type="button">Enviar candidatura</button>
 
     </form>
 
@@ -219,45 +266,54 @@ button:active {
 </div>
 
 <script>
-const canvas = document.getElementById("particles");
-const ctx = canvas.getContext("2d");
+/* PARTICLES */
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas.width=innerWidth;
+canvas.height=innerHeight;
 
-let particles = [];
+let p=[];
 
-for (let i = 0; i < 60; i++) {
-  particles.push({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    r: Math.random() * 1.5,
-    dx: (Math.random() - 0.5) * 0.4,
-    dy: (Math.random() - 0.5) * 0.4
+for(let i=0;i<55;i++){
+  p.push({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    r:Math.random()*1.2,
+    dx:(Math.random()-0.5)*0.35,
+    dy:(Math.random()-0.5)*0.35
   });
 }
 
-function animate() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+function anim(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
 
-  ctx.fillStyle = "rgba(120,170,255,0.5)";
+  ctx.fillStyle="rgba(120,160,255,0.4)";
 
-  particles.forEach(p => {
+  p.forEach(e=>{
     ctx.beginPath();
-    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.arc(e.x,e.y,e.r,0,Math.PI*2);
     ctx.fill();
 
-    p.x += p.dx;
-    p.y += p.dy;
+    e.x+=e.dx;
+    e.y+=e.dy;
 
-    if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
-    if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+    if(e.x<0||e.x>canvas.width)e.dx*=-1;
+    if(e.y<0||e.y>canvas.height)e.dy*=-1;
   });
 
-  requestAnimationFrame(animate);
+  requestAnimationFrame(anim);
 }
+anim();
 
-animate();
+/* SOUND - seguro (browser unlock) */
+const sound=document.getElementById("clickSound");
+document.querySelectorAll("input,textarea").forEach(el=>{
+  el.addEventListener("focus",()=>{
+    sound.currentTime=0;
+    sound.play();
+  });
+});
 </script>
 
 </body>
