@@ -47,10 +47,6 @@ body{
   z-index:9999;
 }
 
-.entry-box{
-  text-align:center;
-}
-
 .entry-box img{
   width:150px;
   filter:drop-shadow(0 0 25px rgba(80,160,255,0.9));
@@ -68,21 +64,21 @@ body{
 }
 
 .wrapper{
+  display:none;
   position:relative;
   z-index:3;
-  display:none;
+  height:100vh;
   justify-content:center;
   align-items:center;
-  height:100vh;
   flex-direction:column;
-  gap:12px;
-  padding:18px;
+  gap:10px;
+  padding:15px;
 }
 
 .card{
   width:100%;
   max-width:520px;
-  max-height:72vh;
+  max-height:75vh;
   overflow-y:auto;
   background:rgba(10,18,40,0.72);
   border:1px solid rgba(120,160,255,0.18);
@@ -91,22 +87,12 @@ body{
   backdrop-filter:blur(14px);
 }
 
-.form-header{
-  text-align:center;
-}
-
-.form-header img{
-  width:90px;
-  filter:drop-shadow(0 0 20px rgba(80,160,255,0.9));
-}
-
 .form-title{
   text-align:center;
   margin:10px 0;
+  color:#7fb2ff;
   font-size:14px;
   letter-spacing:2px;
-  color:#7fb2ff;
-  text-transform:uppercase;
 }
 
 label{
@@ -123,12 +109,11 @@ input,textarea{
   border:1px solid rgba(120,160,255,0.18);
   background:rgba(255,255,255,0.04);
   color:white;
-  outline:none;
 }
 
 button.submit{
   width:100%;
-  margin-top:14px;
+  margin-top:15px;
   padding:12px;
   border:none;
   border-radius:12px;
@@ -150,12 +135,11 @@ button.submit{
 }
 
 #cutscene img{
-  width:240px;
+  width:220px;
 }
 
 .zig{
-  margin-top:20px;
-  font-size:14px;
+  margin-top:15px;
   color:#7fb2ff;
 }
 </style>
@@ -177,10 +161,6 @@ button.submit{
 <div class="wrapper" id="main">
 
   <div class="card">
-
-    <div class="form-header">
-      <img src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif">
-    </div>
 
     <div class="form-title">FORMULÁRIO DE CANDIDATURA</div>
 
@@ -238,7 +218,7 @@ button.submit{
 
 <div id="cutscene">
   <img src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/LOGO.gif">
-  <div class="zig">FEITO POR ZIG</div>
+  <div class="zig">ENVIADO COM SUCESSO</div>
 </div>
 
 <script>
@@ -252,59 +232,54 @@ document.getElementById("form").addEventListener("submit", async (e)=>{
 
   const webhookURL = "COLE_SUA_WEBHOOK_AQUI";
 
-  const inputs = document.querySelectorAll("input");
-  const texts = document.querySelectorAll("textarea");
+  const formData = {
+    nome: document.querySelectorAll("input")[0].value,
+    discord: document.querySelectorAll("input")[1].value,
+    idade: document.querySelectorAll("input")[2].value,
+    tempo: document.querySelectorAll("input")[3].value,
+    cargo: document.querySelectorAll("input")[4].value,
+    livre: document.querySelectorAll("input")[5].value,
 
-  const payload = {
-    content: "📩 Nova candidatura recebida!",
-    embeds: [{
-      title: "Tempest Buxx • Recrutamento",
-      color: 0x4da3ff,
-      fields: [
-        { name:"Nome", value:inputs[0].value || "N/A", inline:false },
-        { name:"Discord", value:inputs[1].value || "N/A", inline:false },
-        { name:"Idade", value:inputs[2].value || "N/A", inline:false },
-        { name:"Tempo no Discord", value:inputs[3].value || "N/A", inline:false },
-
-        { name:"Staff antes?", value:texts[0].value || "N/A", inline:false },
-        { name:"Servidores", value:texts[1].value || "N/A", inline:false },
-
-        { name:"Cargo anterior", value:inputs[4].value || "N/A", inline:false },
-
-        { name:"Saiu staff", value:texts[2].value || "N/A", inline:false },
-        { name:"Saiu servidor", value:texts[3].value || "N/A", inline:false },
-
-        { name:"Tempo livre", value:inputs[5].value || "N/A", inline:false },
-
-        { name:"Cliente irritado?", value:texts[4].value || "N/A", inline:false },
-
-        { name:"Entrar na loja", value:texts[5].value || "N/A", inline:false },
-        { name:"Ajudar crescimento", value:texts[6].value || "N/A", inline:false },
-
-        { name:"Sobre você", value:texts[7].value || "N/A", inline:false }
-      ]
-    }]
+    staff: document.querySelectorAll("textarea")[0].value,
+    servidores: document.querySelectorAll("textarea")[1].value,
+    saiuStaff: document.querySelectorAll("textarea")[2].value,
+    saiuServer: document.querySelectorAll("textarea")[3].value,
+    irritado: document.querySelectorAll("textarea")[4].value,
+    entrar: document.querySelectorAll("textarea")[5].value,
+    crescer: document.querySelectorAll("textarea")[6].value,
+    sobre: document.querySelectorAll("textarea")[7].value,
   };
 
-  try{
-    const res = await fetch(webhookURL,{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify(payload)
-    });
+  await fetch(webhookURL,{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      content:"📩 Nova candidatura",
+      embeds:[{
+        title:"Tempest Buxx",
+        color:0x4da3ff,
+        fields:[
+          {name:"Nome",value:formData.nome},
+          {name:"Discord",value:formData.discord},
+          {name:"Idade",value:formData.idade},
+          {name:"Tempo",value:formData.tempo},
+          {name:"Cargo",value:formData.cargo},
+          {name:"Livre",value:formData.livre},
+          {name:"Experiência Staff",value:formData.staff},
+          {name:"Servidores",value:formData.servidores},
+          {name:"Saiu Staff",value:formData.saiuStaff},
+          {name:"Saiu Server",value:formData.saiuServer},
+          {name:"Cliente irritado",value:formData.irritado},
+          {name:"Entrar",value:formData.entrar},
+          {name:"Crescer",value:formData.crescer},
+          {name:"Sobre",value:formData.sobre},
+        ]
+      }]
+    })
+  });
 
-    if(!res.ok){
-      alert("Erro no webhook: " + res.status);
-      return;
-    }
-
-    document.getElementById("cutscene").style.display="flex";
-    setTimeout(()=>location.reload(),2500);
-
-  }catch(err){
-    alert("Erro de conexão");
-    console.error(err);
-  }
+  document.getElementById("cutscene").style.display="flex";
+  setTimeout(()=>location.reload(),2500);
 });
 </script>
 
