@@ -21,7 +21,7 @@ body{
   color:#e8f1ff;
 }
 
-/* BACKGROUND GIF */
+/* BACKGROUND */
 .bg{
   position:fixed;
   inset:0;
@@ -50,42 +50,52 @@ canvas{
   z-index:2;
 }
 
-/* GATE (ENTRY SCREEN) */
-#gate{
+/* ENTRY */
+#entry{
   position:fixed;
   inset:0;
-  background:#050814;
   display:flex;
   justify-content:center;
   align-items:center;
   z-index:999;
+  background:rgba(5,8,20,0.9);
+  backdrop-filter:blur(10px);
 }
 
-.gate-box{
+.entry-box{
   text-align:center;
+  padding:30px;
+  border-radius:18px;
+  border:1px solid rgba(120,160,255,0.2);
+  background:rgba(10,18,40,0.6);
+  box-shadow:0 0 40px rgba(0,120,255,0.15);
 }
 
-.gate-box img{
-  width:140px;
+.entry-box img{
+  width:120px;
   border-radius:12px;
-  filter:drop-shadow(0 0 18px rgba(90,160,255,0.8));
+  margin-bottom:10px;
+  filter:drop-shadow(0 0 15px rgba(90,160,255,0.8));
+}
+
+.entry-box h2{
+  font-size:16px;
   margin-bottom:10px;
 }
 
-.gate-box button{
-  padding:12px 20px;
+.entry-btn{
+  padding:12px 22px;
   border:none;
-  border-radius:10px;
+  border-radius:12px;
   background:linear-gradient(90deg,#2f7bff,#4da3ff);
   color:white;
   font-weight:600;
   cursor:pointer;
+  transition:0.2s;
 }
 
-.gate-box p{
-  font-size:12px;
-  opacity:0.6;
-  margin-top:8px;
+.entry-btn:active{
+  transform:scale(0.96);
 }
 
 /* MAIN */
@@ -101,7 +111,7 @@ canvas{
 
 .card{
   width:100%;
-  max-width:480px;
+  max-width:500px;
   max-height:90vh;
   overflow-y:auto;
   background:rgba(10,18,40,0.72);
@@ -125,19 +135,10 @@ canvas{
 h1{font-size:18px;}
 .sub{font-size:12px;opacity:0.6;}
 
-.drop{
-  text-align:center;
-  margin:10px 0;
-  font-size:12px;
-  letter-spacing:4px;
-  color:#7fb2ff;
-}
-
 label{
   display:block;
   margin-top:12px;
   font-size:12px;
-  opacity:0.9;
 }
 
 input,textarea{
@@ -170,8 +171,6 @@ button.submit{
   font-weight:600;
   cursor:pointer;
 }
-
-/* PARTICLES */
 </style>
 </head>
 
@@ -179,26 +178,25 @@ button.submit{
 
 <div class="bg"></div>
 <div class="overlay"></div>
-
 <canvas id="particles"></canvas>
 
-<!-- 🔊 SOM -->
+<!-- ENTRY -->
+<div id="entry">
+  <div class="entry-box">
+    <img src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif">
+    <h2>Tempest Buxx</h2>
+    <button class="entry-btn" onclick="enterSite()">Entrar no formulário</button>
+  </div>
+</div>
+
+<!-- AUDIO -->
 <audio id="startSound">
-  <source src="https://assets.mixkit.co/sfx/preview/mixkit-game-start-voice-off-2868.mp3">
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a6c8c5.mp3">
 </audio>
 
 <audio id="clickSound">
-  <source src="https://assets.mixkit.co/sfx/preview/mixkit-soft-click-1116.mp3">
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_0a1f5d3c6b.mp3">
 </audio>
-
-<!-- ENTRY -->
-<div id="gate">
-  <div class="gate-box">
-    <img src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif">
-    <button onclick="enterSite()">Entrar</button>
-    <p>Toque para entrar</p>
-  </div>
-</div>
 
 <!-- MAIN -->
 <div class="wrapper" id="main">
@@ -208,10 +206,8 @@ button.submit{
     <div class="header">
       <img class="logo" src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif">
       <h1>Tempest Buxx</h1>
-      <div class="sub">Staff Application</div>
+      <div class="sub">Staff Application Form</div>
     </div>
-
-    <div class="drop">FORMULÁRIO</div>
 
     <form>
 
@@ -224,13 +220,13 @@ button.submit{
       <label>Idade</label>
       <input type="number">
 
-      <label>Há quanto tempo usa Discord?</label>
+      <label>Tempo no Discord</label>
       <input>
 
-      <label>Já foi staff antes?</label>
+      <label>Já foi staff?</label>
       <textarea rows="2"></textarea>
 
-      <label>Se sim, onde?</label>
+      <label>Onde?</label>
       <textarea rows="2"></textarea>
 
       <label>Cargo anterior</label>
@@ -242,16 +238,13 @@ button.submit{
       <label>Tempo livre por dia</label>
       <input>
 
-      <label>Como lidaria com alguém irritado?</label>
+      <label>Como lidaria com conflito?</label>
       <textarea rows="2"></textarea>
 
-      <label>Por que quer entrar na Tempest Buxx?</label>
+      <label>Por que quer entrar?</label>
       <textarea rows="2"></textarea>
 
-      <label>Como ajudaria o servidor?</label>
-      <textarea rows="2"></textarea>
-
-      <label>Fale sobre você</label>
+      <label>Sobre você</label>
       <textarea rows="3"></textarea>
 
       <button class="submit" type="button">Enviar candidatura</button>
@@ -263,21 +256,16 @@ button.submit{
 </div>
 
 <script>
-/* ENTER SITE */
 function enterSite(){
   const s=document.getElementById("startSound");
   s.volume=0.6;
-  s.play();
+  s.play().catch(()=>{});
 
-  document.getElementById("gate").style.opacity="0";
-
-  setTimeout(()=>{
-    document.getElementById("gate").style.display="none";
-    document.getElementById("main").style.display="flex";
-  },800);
+  document.getElementById("entry").style.display="none";
+  document.getElementById("main").style.display="flex";
 }
 
-/* CLICK SOUND */
+/* click sound */
 const click=document.getElementById("clickSound");
 document.querySelectorAll("input,textarea").forEach(el=>{
   el.addEventListener("focus",()=>{
@@ -286,7 +274,7 @@ document.querySelectorAll("input,textarea").forEach(el=>{
   });
 });
 
-/* PARTICLES */
+/* particles */
 const c=document.getElementById("particles");
 const x=c.getContext("2d");
 
