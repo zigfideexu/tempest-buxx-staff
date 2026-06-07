@@ -18,7 +18,7 @@
 body{
   background:#050814;
   overflow:hidden;
-  color:#e6f0ff;
+  color:#e8f1ff;
 }
 
 /* BACKGROUND GIF */
@@ -29,7 +29,7 @@ body{
   filter:blur(18px) brightness(0.35);
   transform:scale(1.1);
   z-index:0;
-  animation:moveBg 12s ease-in-out infinite alternate;
+  animation:moveBg 14s ease-in-out infinite alternate;
 }
 
 @keyframes moveBg{
@@ -37,45 +37,71 @@ body{
   to{transform:scale(1.15) translateY(-10px);}
 }
 
-/* OVERLAY */
+/* overlay */
 .overlay{
   position:fixed;
   inset:0;
-  background:radial-gradient(circle at top,rgba(0,120,255,0.15),#050814 70%);
+  background:radial-gradient(circle at top,#0b1a3a88,#050814 70%);
   z-index:1;
 }
 
-/* PARTICLES */
+/* particles */
 canvas{
   position:fixed;
   inset:0;
   z-index:2;
 }
 
-/* SOUND */
-audio{display:none;}
-
-/* CONTAINER */
-.wrapper{
-  position:relative;
-  z-index:3;
-  height:100vh;
+/* INTRO */
+.intro{
+  position:fixed;
+  inset:0;
   display:flex;
   justify-content:center;
   align-items:center;
-  padding:20px;
+  background:#050814;
+  z-index:10;
+  animation:fadeOut 1.2s ease forwards;
+  animation-delay:1.5s;
+}
+
+.intro img{
+  width:140px;
+  border-radius:12px;
+  filter:drop-shadow(0 0 18px rgba(90,160,255,0.8));
+  animation:zoom 1s ease;
+}
+
+@keyframes zoom{
+  from{transform:scale(0.6);opacity:0;}
+  to{transform:scale(1);opacity:1;}
+}
+
+@keyframes fadeOut{
+  to{opacity:0;visibility:hidden;}
+}
+
+/* MAIN */
+.wrapper{
+  position:relative;
+  z-index:3;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  padding:18px;
 }
 
 /* CARD */
 .card{
   width:100%;
-  max-width:460px;
+  max-width:480px;
   max-height:90vh;
   overflow-y:auto;
-  background:rgba(10,18,35,0.75);
+  background:rgba(10,18,40,0.72);
   border:1px solid rgba(120,160,255,0.18);
   border-radius:18px;
-  padding:18px;
+  padding:20px;
   backdrop-filter:blur(14px);
   box-shadow:0 0 40px rgba(0,120,255,0.12);
 }
@@ -88,12 +114,11 @@ audio{display:none;}
 .logo{
   width:85px;
   border-radius:10px;
-  filter:drop-shadow(0 0 12px rgba(80,150,255,0.8));
+  filter:drop-shadow(0 0 14px rgba(90,160,255,0.8));
 }
 
 h1{
   font-size:18px;
-  margin-top:5px;
 }
 
 .sub{
@@ -101,7 +126,7 @@ h1{
   opacity:0.6;
 }
 
-/* TITLE DROP */
+/* TITLE */
 .drop{
   text-align:center;
   margin:10px 0;
@@ -110,7 +135,7 @@ h1{
   color:#7fb2ff;
   animation:drop 1s ease forwards;
   opacity:0;
-  animation-delay:1.2s;
+  animation-delay:1.3s;
 }
 
 @keyframes drop{
@@ -132,7 +157,7 @@ input,textarea{
   margin-top:6px;
   padding:11px;
   border-radius:10px;
-  border:1px solid rgba(120,160,255,0.2);
+  border:1px solid rgba(120,160,255,0.18);
   background:rgba(255,255,255,0.04);
   color:white;
   outline:none;
@@ -142,8 +167,8 @@ input,textarea{
 
 input:focus,textarea:focus{
   transform:scale(1.02);
-  box-shadow:0 0 0 3px rgba(80,150,255,0.15);
-  border-color:rgba(80,150,255,0.6);
+  box-shadow:0 0 0 3px rgba(90,160,255,0.15);
+  border-color:rgba(90,160,255,0.6);
 }
 
 /* BUTTON */
@@ -162,34 +187,6 @@ button{
 button:active{
   transform:scale(0.97);
 }
-
-/* INTRO */
-.intro{
-  position:fixed;
-  inset:0;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:#050814;
-  z-index:10;
-  animation:fadeOut 1.2s ease forwards;
-  animation-delay:1.4s;
-}
-
-.intro img{
-  width:140px;
-  filter:drop-shadow(0 0 18px rgba(80,150,255,0.8));
-  animation:zoom 1s ease;
-}
-
-@keyframes zoom{
-  from{transform:scale(0.6);opacity:0;}
-  to{transform:scale(1);opacity:1;}
-}
-
-@keyframes fadeOut{
-  to{opacity:0;visibility:hidden;}
-}
 </style>
 </head>
 
@@ -200,8 +197,10 @@ button:active{
 
 <canvas id="particles"></canvas>
 
-<!-- SOUND -->
-<audio id="clickSound" src="https://www.myinstants.com/media/sounds/mouse-click.mp3"></audio>
+<!-- SOM MAIS SUAVE -->
+<audio id="clickSound">
+  <source src="https://assets.mixkit.co/sfx/preview/mixkit-soft-click-1116.mp3" type="audio/mpeg">
+</audio>
 
 <!-- INTRO -->
 <div class="intro">
@@ -225,25 +224,43 @@ button:active{
       <label>Nome</label>
       <input>
 
-      <label>Discord</label>
+      <label>Usuário do Discord</label>
       <input>
 
       <label>Idade</label>
       <input type="number">
 
-      <label>Experiência no Discord</label>
+      <label>Há quanto tempo usa Discord?</label>
+      <input>
+
+      <label>Já foi staff antes?</label>
       <textarea rows="2"></textarea>
 
-      <label>Já foi staff?</label>
+      <label>Se sim, onde?</label>
       <textarea rows="2"></textarea>
 
-      <label>Por que quer entrar?</label>
+      <label>Cargo anterior</label>
+      <input>
+
+      <label>Por que saiu?</label>
       <textarea rows="2"></textarea>
 
-      <label>Sobre você</label>
+      <label>Tempo livre por dia</label>
+      <input>
+
+      <label>Como lidaria com alguém irritado?</label>
+      <textarea rows="2"></textarea>
+
+      <label>Por que quer entrar na Tempest Buxx?</label>
+      <textarea rows="2"></textarea>
+
+      <label>Como ajudaria o servidor?</label>
+      <textarea rows="2"></textarea>
+
+      <label>Fale sobre você</label>
       <textarea rows="3"></textarea>
 
-      <button>Enviar candidatura</button>
+      <button type="button">Enviar candidatura</button>
 
     </form>
 
@@ -251,45 +268,45 @@ button:active{
 </div>
 
 <script>
-/* PARTICLES */
-const canvas=document.getElementById("particles");
-const ctx=canvas.getContext("2d");
+/* particles */
+const c=document.getElementById("particles");
+const x=c.getContext("2d");
 
-canvas.width=innerWidth;
-canvas.height=innerHeight;
+c.width=innerWidth;
+c.height=innerHeight;
 
 let p=[];
 for(let i=0;i<50;i++){
   p.push({
-    x:Math.random()*canvas.width,
-    y:Math.random()*canvas.height,
-    r:Math.random()*1.2,
+    x:Math.random()*c.width,
+    y:Math.random()*c.height,
+    r:Math.random()*1.1,
     dx:(Math.random()-0.5)*0.3,
     dy:(Math.random()-0.5)*0.3
   });
 }
 
 function anim(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  ctx.fillStyle="rgba(120,160,255,0.35)";
+  x.clearRect(0,0,c.width,c.height);
+  x.fillStyle="rgba(120,160,255,0.35)";
 
   p.forEach(e=>{
-    ctx.beginPath();
-    ctx.arc(e.x,e.y,e.r,0,Math.PI*2);
-    ctx.fill();
+    x.beginPath();
+    x.arc(e.x,e.y,e.r,0,Math.PI*2);
+    x.fill();
 
     e.x+=e.dx;
     e.y+=e.dy;
 
-    if(e.x<0||e.x>canvas.width)e.dx*=-1;
-    if(e.y<0||e.y>canvas.height)e.dy*=-1;
+    if(e.x<0||e.x>c.width)e.dx*=-1;
+    if(e.y<0||e.y>c.height)e.dy*=-1;
   });
 
   requestAnimationFrame(anim);
 }
 anim();
 
-/* CLICK SOUND (mobile safe) */
+/* soft sound */
 const sound=document.getElementById("clickSound");
 document.querySelectorAll("input,textarea").forEach(el=>{
   el.addEventListener("focus",()=>{
