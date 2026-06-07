@@ -33,17 +33,17 @@
 
     .card {
       width: 420px;
-      background: rgba(10, 18, 40, 0.78);
+      background: rgba(10, 18, 40, 0.8);
       border: 1px solid rgba(80, 140, 255, 0.35);
       border-radius: 16px;
       padding: 22px;
-      box-shadow: 0 0 25px rgba(0,120,255,0.15);
+      box-shadow: 0 0 25px rgba(0,120,255,0.2);
       backdrop-filter: blur(6px);
     }
 
     h1 {
       text-align: center;
-      margin-bottom: 5px;
+      margin: 5px 0;
       color: #cfe3ff;
     }
 
@@ -57,7 +57,8 @@
       display: block;
       margin: 0 auto 10px;
       width: 140px;
-      filter: drop-shadow(0 0 12px rgba(0,140,255,0.7));
+      border-radius: 12px;
+      filter: drop-shadow(0 0 12px rgba(0,140,255,0.8));
     }
 
     label {
@@ -101,14 +102,14 @@
 <div class="container">
   <div class="card">
 
-    <!-- LOGO GIF -->
+    <!-- SUA IMAGEM -->
     <img class="logo"
-      src="https://cdn.discordapp.com/attachments/1511893405075243122/1513067808819511376/20260601_214159.gif">
+      src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif">
 
     <h1>Tempest Buxx</h1>
     <p class="subtitle">Candidatura para Staff</p>
 
-    <form id="staffForm">
+    <form>
 
       <label>Qual seu nome?</label>
       <input type="text" required>
@@ -128,28 +129,25 @@
       <label>Se sim, em quais servidores?</label>
       <textarea rows="3"></textarea>
 
-      <label>Qual era o seu cargo?</label>
+      <label>Qual era seu cargo?</label>
       <input type="text">
 
-      <label>Por que você deixou de ser staff?</label>
+      <label>Por que saiu da staff?</label>
       <textarea rows="3"></textarea>
 
-      <label>Por que você saiu do servidor?</label>
-      <textarea rows="3"></textarea>
-
-      <label>Quanto tempo livre você tem por dia?</label>
+      <label>Quanto tempo livre por dia?</label>
       <input type="text">
 
-      <label>Como você lidaria com um cliente irritado?</label>
+      <label>Como lidaria com cliente irritado?</label>
       <textarea rows="3"></textarea>
 
-      <label>Por que quer entrar para a Tempest Buxx?</label>
+      <label>Por que quer entrar na Tempest Buxx?</label>
       <textarea rows="3"></textarea>
 
-      <label>O que você faria para ajudar a loja a crescer?</label>
+      <label>O que faria para ajudar a loja?</label>
       <textarea rows="3"></textarea>
 
-      <label>Conte um pouco sobre você.</label>
+      <label>Conte sobre você</label>
       <textarea rows="4"></textarea>
 
       <button type="submit">Enviar</button>
@@ -164,42 +162,4 @@ const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
 
 canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let particles = [];
-
-for (let i = 0; i < 60; i++) {
-  particles.push({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    r: Math.random() * 2,
-    dx: (Math.random() - 0.5) * 0.6,
-    dy: (Math.random() - 0.5) * 0.6
-  });
-}
-
-function animate() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  ctx.fillStyle = "rgba(80,140,255,0.6)";
-
-  particles.forEach(p => {
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-    ctx.fill();
-
-    p.x += p.dx;
-    p.y += p.dy;
-
-    if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
-    if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
-  });
-
-  requestAnimationFrame(animate);
-}
-
-animate();
-</script>
-
-</body>
-</html>
+canvas.height = window      
