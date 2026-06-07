@@ -58,29 +58,23 @@ canvas{
   justify-content:center;
   align-items:center;
   z-index:999;
-  background:rgba(5,8,20,0.9);
-  backdrop-filter:blur(10px);
+  background:rgba(5,8,20,0.92);
 }
 
 .entry-box{
   text-align:center;
-  padding:30px;
+  padding:28px;
   border-radius:18px;
-  border:1px solid rgba(120,160,255,0.2);
   background:rgba(10,18,40,0.6);
+  border:1px solid rgba(120,160,255,0.2);
   box-shadow:0 0 40px rgba(0,120,255,0.15);
 }
 
 .entry-box img{
   width:120px;
+  margin-bottom:10px;
   border-radius:12px;
-  margin-bottom:10px;
   filter:drop-shadow(0 0 15px rgba(90,160,255,0.8));
-}
-
-.entry-box h2{
-  font-size:16px;
-  margin-bottom:10px;
 }
 
 .entry-btn{
@@ -91,11 +85,6 @@ canvas{
   color:white;
   font-weight:600;
   cursor:pointer;
-  transition:0.2s;
-}
-
-.entry-btn:active{
-  transform:scale(0.96);
 }
 
 /* MAIN */
@@ -107,12 +96,14 @@ canvas{
   align-items:center;
   height:100vh;
   padding:18px;
+  flex-direction:column;
+  gap:20px;
 }
 
 .card{
   width:100%;
   max-width:500px;
-  max-height:90vh;
+  max-height:70vh;
   overflow-y:auto;
   background:rgba(10,18,40,0.72);
   border:1px solid rgba(120,160,255,0.18);
@@ -150,15 +141,9 @@ input,textarea{
   background:rgba(255,255,255,0.04);
   color:white;
   outline:none;
-  transition:0.2s;
-  font-size:13px;
 }
 
-input:focus,textarea:focus{
-  transform:scale(1.02);
-  box-shadow:0 0 0 3px rgba(90,160,255,0.15);
-  border-color:rgba(90,160,255,0.6);
-}
+textarea{resize:none;}
 
 button.submit{
   width:100%;
@@ -169,7 +154,41 @@ button.submit{
   background:linear-gradient(90deg,#2f7bff,#4da3ff);
   color:white;
   font-weight:600;
-  cursor:pointer;
+}
+
+/* ===== MENU BENEFÍCIOS ===== */
+.benefits{
+  display:flex;
+  gap:10px;
+  max-width:500px;
+  width:100%;
+}
+
+.card-mini{
+  flex:1;
+  padding:12px;
+  border-radius:14px;
+  background:rgba(10,18,40,0.6);
+  border:1px solid rgba(120,160,255,0.18);
+  backdrop-filter:blur(10px);
+  font-size:11px;
+}
+
+.card-mini h3{
+  font-size:12px;
+  margin-bottom:4px;
+  color:#7fb2ff;
+}
+
+/* LOGO CANTO */
+.corner-logo{
+  position:fixed;
+  bottom:10px;
+  right:10px;
+  width:55px;
+  opacity:0.7;
+  z-index:10;
+  filter:drop-shadow(0 0 10px rgba(90,160,255,0.6));
 }
 </style>
 </head>
@@ -184,12 +203,10 @@ button.submit{
 <div id="entry">
   <div class="entry-box">
     <img src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif">
-    <h2>Tempest Buxx</h2>
-    <button class="entry-btn" onclick="enterSite()">Entrar no formulário</button>
+    <button class="entry-btn" onclick="enterSite()">Entrar</button>
   </div>
 </div>
 
-<!-- AUDIO -->
 <audio id="startSound">
   <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a6c8c5.mp3">
 </audio>
@@ -206,7 +223,7 @@ button.submit{
     <div class="header">
       <img class="logo" src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif">
       <h1>Tempest Buxx</h1>
-      <div class="sub">Staff Application Form</div>
+      <div class="sub">Staff Application</div>
     </div>
 
     <form>
@@ -214,34 +231,16 @@ button.submit{
       <label>Nome</label>
       <input>
 
-      <label>Usuário do Discord</label>
+      <label>Discord</label>
       <input>
 
       <label>Idade</label>
       <input type="number">
 
-      <label>Tempo no Discord</label>
-      <input>
+      <label>Experiência</label>
+      <textarea rows="2"></textarea>
 
       <label>Já foi staff?</label>
-      <textarea rows="2"></textarea>
-
-      <label>Onde?</label>
-      <textarea rows="2"></textarea>
-
-      <label>Cargo anterior</label>
-      <input>
-
-      <label>Por que saiu?</label>
-      <textarea rows="2"></textarea>
-
-      <label>Tempo livre por dia</label>
-      <input>
-
-      <label>Como lidaria com conflito?</label>
-      <textarea rows="2"></textarea>
-
-      <label>Por que quer entrar?</label>
       <textarea rows="2"></textarea>
 
       <label>Sobre você</label>
@@ -253,19 +252,36 @@ button.submit{
 
   </div>
 
+  <!-- MENU BENEFÍCIOS -->
+  <div class="benefits">
+    <div class="card-mini">
+      <h3>Ambiente Profissional</h3>
+      Trabalhe em uma equipe organizada e incrível.
+    </div>
+
+    <div class="card-mini">
+      <h3>Benefícios</h3>
+      Comissões e vantagens exclusivas.
+    </div>
+
+    <div class="card-mini">
+      <h3>Crescimento</h3>
+      Evolua junto com a Tempest Buxx.
+    </div>
+  </div>
+
 </div>
+
+<!-- LOGO CANTO -->
+<img class="corner-logo" src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif">
 
 <script>
 function enterSite(){
-  const s=document.getElementById("startSound");
-  s.volume=0.6;
-  s.play().catch(()=>{});
-
+  document.getElementById("startSound").play().catch(()=>{});
   document.getElementById("entry").style.display="none";
   document.getElementById("main").style.display="flex";
 }
 
-/* click sound */
 const click=document.getElementById("clickSound");
 document.querySelectorAll("input,textarea").forEach(el=>{
   el.addEventListener("focus",()=>{
