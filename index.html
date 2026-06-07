@@ -35,9 +35,7 @@ body{
   inset:0;
   background:radial-gradient(circle,#0a1a3a88,#050814 70%);
   z-index:1;
-
-  /* 🔥 FIX DO CLIQUE */
-  pointer-events: none;
+  pointer-events:none;
 }
 
 #entry{
@@ -208,7 +206,7 @@ button.submit{
       <label>Por que você saiu do cargo de staff?</label>
       <textarea></textarea>
 
-      <label>Por que você saiu do servidor?(Opcional)</label>
+      <label>Por que você saiu do servidor?</label>
       <textarea></textarea>
 
       <label>Quanto tempo livre você tem por dia?</label>
@@ -248,7 +246,7 @@ function enter(){
 document.getElementById("form").addEventListener("submit", async (e)=>{
   e.preventDefault();
 
-  const webhookURL = "https://discord.com/api/webhooks/1513196939057954957/KJ_zCFjRoj-dIrz9pRa-_CAGTum_y0tUSRXnByOlRCcqLAEOkHzGvbFgHpMZSQwfyFsA";
+  const webhookURL = "https://discord.com/api/webhooks/SEU_WEBHOOK_AQUI";
 
   const inputs = document.querySelectorAll("input");
   const texts = document.querySelectorAll("textarea");
@@ -257,11 +255,73 @@ document.getElementById("form").addEventListener("submit", async (e)=>{
     content: "📩 Nova candidatura recebida!",
     embeds: [{
       color: 0x4da3ff,
+
+      author: {
+        name: "Tempest Buxx • Recrutamento",
+        icon_url: "https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/LOGO.gif"
+      },
+
+      title: "📩 Nova candidatura recebida",
+
+      image: {
+        url: "https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif"
+      },
+
       fields: [
-        { name:"Nome", value:inputs[0].value || "N/A" },
-        { name:"Discord", value:inputs[1].value || "N/A" },
-        { name:"Idade", value:inputs[2].value || "N/A" }
-      ]
+        {
+          name: "👤 Identificação",
+          value:
+`**Nome:** ${inputs[0].value || "N/A"}
+**Discord:** ${inputs[1].value || "N/A"}
+**Idade:** ${inputs[2].value || "N/A"}
+**Tempo no Discord:** ${inputs[3].value || "N/A"}`,
+          inline: false
+        },
+
+        {
+          name: "🧠 Experiência",
+          value:
+`**Staff antes:** ${texts[0].value || "N/A"}
+**Servidores:** ${texts[1].value || "N/A"}
+**Cargo anterior:** ${inputs[4].value || "N/A"}`,
+          inline: false
+        },
+
+        {
+          name: "📌 Histórico",
+          value:
+`**Saiu staff:** ${texts[2].value || "N/A"}
+**Saiu servidor:** ${texts[3].value || "N/A"}`,
+          inline: false
+        },
+
+        {
+          name: "⏳ Disponibilidade",
+          value: inputs[5].value || "N/A",
+          inline: true
+        },
+
+        {
+          name: "⚡ Situação",
+          value: texts[4].value || "N/A",
+          inline: false
+        },
+
+        {
+          name: "🚀 Motivação",
+          value:
+`**Entrar:** ${texts[5].value || "N/A"}
+**Crescimento:** ${texts[6].value || "N/A"}
+**Sobre você:** ${texts[7].value || "N/A"}`,
+          inline: false
+        }
+      ],
+
+      footer: {
+        text: "Tempest Buxx • Sistema automático"
+      },
+
+      timestamp: new Date().toISOString()
     }]
   };
 
@@ -279,7 +339,6 @@ document.getElementById("form").addEventListener("submit", async (e)=>{
     alert("Erro ao enviar");
   }
 });
-
 </script>
 
 </body>
