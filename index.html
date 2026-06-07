@@ -177,20 +177,20 @@ button.submit{
       <img src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif">
     </div>
 
-    <div class="form-title">FORMULÁRIO DE CANDIDATURA</div>
+    <div class="form-title">FORMULÁRIO DE STAFF TEMPEST-BUXX</div>
 
     <form id="form">
 
       <label>Nome</label>
       <input required>
 
-      <label>Discord</label>
+      <label>Discord (nick)</label>
       <input required>
 
       <label>Idade</label>
       <input type="number" required>
 
-      <label>Tempo no Discord</label>
+      <label>A quanto tempo usa Discord?</label>
       <input>
 
       <label>Você já trabalhou como staff antes?</label>
@@ -205,7 +205,7 @@ button.submit{
       <label>Por que você saiu do cargo de staff?</label>
       <textarea></textarea>
 
-      <label>Por que você saiu do servidor?</label>
+      <label>Por que você saiu do servidor?(Opcional)</label>
       <textarea></textarea>
 
       <label>Quanto tempo livre você tem por dia?</label>
@@ -245,7 +245,7 @@ function enter(){
 document.getElementById("form").addEventListener("submit", async (e)=>{
   e.preventDefault();
 
-  const webhookURL = "COLE_SUA_WEBHOOK_AQUI";
+  const webhookURL = "https://discord.com/api/webhooks/1513196939057954957/KJ_zCFjRoj-dIrz9pRa-_CAGTum_y0tUSRXnByOlRCcqLAEOkHzGvbFgHpMZSQwfyFsA";
 
   const inputs = document.querySelectorAll("input");
   const texts = document.querySelectorAll("textarea");
