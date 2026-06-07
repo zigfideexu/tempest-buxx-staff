@@ -21,7 +21,6 @@ body{
   color:#e8f1ff;
 }
 
-/* FUNDO */
 .bg{
   position:fixed;
   inset:0;
@@ -38,7 +37,6 @@ body{
   z-index:1;
 }
 
-/* ENTRADA */
 #entry{
   position:fixed;
   inset:0;
@@ -69,7 +67,6 @@ body{
   cursor:pointer;
 }
 
-/* MAIN */
 .wrapper{
   position:relative;
   z-index:3;
@@ -94,7 +91,6 @@ body{
   backdrop-filter:blur(14px);
 }
 
-/* HEADER */
 .form-header{
   text-align:center;
 }
@@ -113,7 +109,6 @@ body{
   text-transform:uppercase;
 }
 
-/* INPUTS */
 label{
   display:block;
   margin-top:12px;
@@ -136,7 +131,6 @@ input:focus, textarea:focus{
   box-shadow:0 0 12px rgba(77,160,255,0.45);
 }
 
-/* BOTÃO */
 button.submit{
   width:100%;
   margin-top:14px;
@@ -149,7 +143,6 @@ button.submit{
   cursor:pointer;
 }
 
-/* PEZINHO */
 .benefits-footer{
   display:flex;
   gap:10px;
@@ -173,14 +166,12 @@ button.submit{
   margin-bottom:4px;
 }
 
-/* MARCA D’ÁGUA */
 .watermark-logo{
   width:55px;
   opacity:0.35;
   filter:drop-shadow(0 0 10px rgba(80,160,255,0.6));
 }
 
-/* CUTSCENE */
 #cutscene{
   position:fixed;
   inset:0;
@@ -210,7 +201,6 @@ button.submit{
 <div class="bg"></div>
 <div class="overlay"></div>
 
-<!-- ENTRADA -->
 <div id="entry">
   <div class="entry-box">
     <img src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif">
@@ -219,7 +209,6 @@ button.submit{
   </div>
 </div>
 
-<!-- MAIN -->
 <div class="wrapper" id="main">
 
   <div class="card">
@@ -235,7 +224,7 @@ button.submit{
       <label>Nome</label>
       <input required>
 
-      <label>Discord</label>
+      <label>Usuário Discord</label>
       <input required>
 
       <label>Idade</label>
@@ -244,19 +233,34 @@ button.submit{
       <label>Tempo no Discord</label>
       <input>
 
-      <label>Experiência Staff</label>
+      <label>Você já trabalhou como staff antes?</label>
       <textarea></textarea>
 
-      <label>Servidores anteriores</label>
+      <label>Em quais servidores você já atuou?</label>
       <textarea></textarea>
 
-      <label>Cargo anterior</label>
+      <label>Qual era seu cargo anterior?</label>
       <input>
 
-      <label>Cliente irritado</label>
+      <label>Por que você saiu do cargo de staff?</label>
       <textarea></textarea>
 
-      <label>Sobre você</label>
+      <label>Por que você saiu do servidor?</label>
+      <textarea></textarea>
+
+      <label>Quanto tempo livre você tem por dia?</label>
+      <input>
+
+      <label>Como você lidaria com um cliente irritado?</label>
+      <textarea></textarea>
+
+      <label>Por que você quer entrar na Tempest Buxx?</label>
+      <textarea></textarea>
+
+      <label>O que você faria para ajudar a loja a crescer?</label>
+      <textarea></textarea>
+
+      <label>Conte um pouco sobre você</label>
       <textarea></textarea>
 
       <button class="submit" type="submit">Enviar candidatura</button>
@@ -265,7 +269,6 @@ button.submit{
 
   </div>
 
-  <!-- PEZINHO -->
   <div class="benefits-footer">
 
     <div class="benefit">
@@ -290,7 +293,6 @@ button.submit{
 
 </div>
 
-<!-- CUTSCENE -->
 <div id="cutscene">
   <img src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/LOGO.gif">
   <div class="zig">FEITO POR ZIG</div>
@@ -305,7 +307,7 @@ function enter(){
 document.getElementById("form").addEventListener("submit", async (e)=>{
   e.preventDefault();
 
-  const webhookURL = "https://discord.com/api/webhooks/SEU_LINK_AQUI";
+  const webhookURL = "COLE_SUA_WEBHOOK_AQUI";
 
   const inputs = document.querySelectorAll("input");
   const texts = document.querySelectorAll("textarea");
@@ -313,39 +315,31 @@ document.getElementById("form").addEventListener("submit", async (e)=>{
   const payload = {
     content: "📩 Nova candidatura recebida!",
     embeds: [{
-      title: "💠 Tempest Buxx • Recrutamento",
+      title: "Tempest Buxx • Recrutamento",
       color: 0x4da3ff,
-
-      thumbnail: {
-        url: "https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/LOGO.gif"
-      },
-
       fields: [
-        {
-          name: "👤 Dados",
-          value:
-            "**Nome:** " + inputs[0].value + "\n" +
-            "**Discord:** " + inputs[1].value + "\n" +
-            "**Idade:** " + inputs[2].value,
-          inline: false
-        },
-        {
-          name: "🧠 Experiência",
-          value: texts[0].value,
-          inline: false
-        },
-        {
-          name: "📌 Motivação",
-          value: texts[3].value,
-          inline: false
-        }
-      ],
+        { name:"Nome", value:inputs[0].value, inline:false },
+        { name:"Discord", value:inputs[1].value, inline:false },
+        { name:"Idade", value:inputs[2].value, inline:false },
+        { name:"Tempo Discord", value:inputs[3].value, inline:false },
 
-      footer: {
-        text: "Tempest Buxx • Sistema automático"
-      },
+        { name:"Staff antes?", value:texts[0].value, inline:false },
+        { name:"Servidores", value:texts[1].value, inline:false },
 
-      timestamp: new Date().toISOString()
+        { name:"Cargo anterior", value:inputs[4].value, inline:false },
+
+        { name:"Saiu staff", value:texts[2].value, inline:false },
+        { name:"Saiu servidor", value:texts[3].value, inline:false },
+
+        { name:"Tempo livre", value:inputs[5].value, inline:false },
+
+        { name:"Cliente irritado", value:texts[4].value, inline:false },
+
+        { name:"Entrar na loja", value:texts[5].value, inline:false },
+        { name:"Ajudar crescimento", value:texts[6].value, inline:false },
+
+        { name:"Sobre você", value:texts[7].value, inline:false }
+      ]
     }]
   };
 
@@ -356,10 +350,7 @@ document.getElementById("form").addEventListener("submit", async (e)=>{
   });
 
   document.getElementById("cutscene").style.display="flex";
-
-  setTimeout(()=>{
-    location.reload();
-  },2500);
+  setTimeout(()=>location.reload(),2500);
 });
 </script>
 
