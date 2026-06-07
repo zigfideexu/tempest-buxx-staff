@@ -68,6 +68,7 @@ body{
   cursor:pointer;
 }
 
+/* MAIN */
 .wrapper{
   position:relative;
   z-index:3;
@@ -80,7 +81,6 @@ body{
   padding:18px;
 }
 
-/* CARD */
 .card{
   width:100%;
   max-width:520px;
@@ -103,6 +103,7 @@ body{
   filter:drop-shadow(0 0 20px rgba(80,160,255,0.9));
 }
 
+/* INPUTS */
 label{
   display:block;
   margin-top:12px;
@@ -117,8 +118,16 @@ input,textarea{
   border:1px solid rgba(120,160,255,0.18);
   background:rgba(255,255,255,0.04);
   color:white;
+  outline:none;
 }
 
+/* GLOW AZUL CORRIGIDO */
+input:focus, textarea:focus{
+  border-color:#4da3ff;
+  box-shadow:0 0 12px rgba(77,163,255,0.45);
+}
+
+/* BOTÃO */
 button.submit{
   width:100%;
   margin-top:14px;
@@ -137,8 +146,6 @@ button.submit{
   gap:10px;
   width:100%;
   max-width:520px;
-  align-items:center;
-  justify-content:space-between;
 }
 
 .benefit{
@@ -154,13 +161,6 @@ button.submit{
   color:#7fb2ff;
   font-size:12px;
   margin-bottom:4px;
-}
-
-/* LOGO MARCA D’ÁGUA */
-.watermark-logo{
-  width:55px;
-  opacity:0.35;
-  filter:drop-shadow(0 0 10px rgba(80,160,255,0.6));
 }
 
 /* CUTSCENE */
@@ -214,23 +214,47 @@ button.submit{
 
     <form id="form">
 
-      <label>Nome</label><input required>
-      <label>Usuário do Discord</label><input required>
-      <label>Idade</label><input type="number" required>
-      <label>Tempo no Discord</label><input>
+      <label>Nome</label>
+      <input required>
 
-      <label>Experiência como staff</label><textarea></textarea>
-      <label>Servidores anteriores</label><textarea></textarea>
-      <label>Cargo anterior</label><input>
+      <label>Usuário do Discord</label>
+      <input required>
 
-      <label>Por que saiu?</label><textarea></textarea>
-      <label>Tempo livre</label><input>
+      <label>Idade</label>
+      <input type="number" required>
 
-      <label>Cliente irritado</label><textarea></textarea>
-      <label>Por que entrar</label><textarea></textarea>
-      <label>Como ajudar</label><textarea></textarea>
+      <label>Tempo de uso do Discord</label>
+      <input>
 
-      <label>Sobre você</label><textarea></textarea>
+      <label>Você já trabalhou como staff antes?</label>
+      <textarea></textarea>
+
+      <label>Em quais servidores você já atuou?</label>
+      <textarea></textarea>
+
+      <label>Qual era o seu cargo anterior?</label>
+      <input>
+
+      <label>Por que você saiu do cargo de staff?</label>
+      <textarea></textarea>
+
+      <label>Por que você saiu do servidor?</label>
+      <textarea></textarea>
+
+      <label>Quanto tempo livre você tem por dia?</label>
+      <input>
+
+      <label>Como você lidaria com um cliente irritado?</label>
+      <textarea></textarea>
+
+      <label>Por que você quer entrar na Tempest Buxx?</label>
+      <textarea></textarea>
+
+      <label>O que você faria para ajudar a loja a crescer?</label>
+      <textarea></textarea>
+
+      <label>Conte um pouco sobre você</label>
+      <textarea></textarea>
 
       <button class="submit" type="submit">Enviar candidatura</button>
 
@@ -238,9 +262,7 @@ button.submit{
 
   </div>
 
-  <!-- PEZINHO COM LOGO -->
   <div class="benefits-footer">
-
     <div class="benefit">
       <h3>Ambiente</h3>
       Equipe organizada.
@@ -255,10 +277,6 @@ button.submit{
       <h3>Crescimento</h3>
       Evolução constante.
     </div>
-
-    <img class="watermark-logo"
-      src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/LOGO.gif">
-
   </div>
 
 </div>
