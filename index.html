@@ -21,20 +21,13 @@ body{
   color:#e8f1ff;
 }
 
-/* BACKGROUND */
 .bg{
   position:fixed;
   inset:0;
   background:url("https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif") center/cover no-repeat;
-  filter:blur(20px) brightness(0.35);
-  transform:scale(1.15);
+  filter:blur(18px) brightness(0.35);
+  transform:scale(1.1);
   z-index:0;
-  animation:slowZoom 12s infinite alternate;
-}
-
-@keyframes slowZoom{
-  from{transform:scale(1.1);}
-  to{transform:scale(1.2);}
 }
 
 .overlay{
@@ -57,12 +50,6 @@ body{
 
 .entry-box{
   text-align:center;
-  animation:entryPop 1s ease;
-}
-
-@keyframes entryPop{
-  from{transform:scale(0.6);opacity:0;}
-  to{transform:scale(1);opacity:1;}
 }
 
 .entry-box img{
@@ -81,7 +68,6 @@ body{
   cursor:pointer;
 }
 
-/* MAIN */
 .wrapper{
   position:relative;
   z-index:3;
@@ -92,12 +78,6 @@ body{
   flex-direction:column;
   gap:12px;
   padding:18px;
-  animation:fadeIn 1s ease;
-}
-
-@keyframes fadeIn{
-  from{opacity:0; transform:translateY(20px);}
-  to{opacity:1; transform:translateY(0);}
 }
 
 /* CARD */
@@ -107,14 +87,12 @@ body{
   max-height:72vh;
   overflow-y:auto;
   background:rgba(10,18,40,0.72);
-  border:1px solid rgba(120,160,255,0.2);
+  border:1px solid rgba(120,160,255,0.18);
   border-radius:18px;
   padding:20px;
   backdrop-filter:blur(14px);
-  box-shadow:0 0 40px rgba(0,120,255,0.15);
 }
 
-/* FORM HEADER GIF */
 .form-header{
   text-align:center;
   margin-bottom:10px;
@@ -125,7 +103,6 @@ body{
   filter:drop-shadow(0 0 20px rgba(80,160,255,0.9));
 }
 
-/* INPUTS */
 label{
   display:block;
   margin-top:12px;
@@ -137,16 +114,9 @@ input,textarea{
   margin-top:6px;
   padding:11px;
   border-radius:10px;
-  border:1px solid rgba(120,160,255,0.2);
+  border:1px solid rgba(120,160,255,0.18);
   background:rgba(255,255,255,0.04);
   color:white;
-  outline:none;
-  transition:0.2s;
-}
-
-input:focus,textarea:focus{
-  border-color:#4da3ff;
-  box-shadow:0 0 10px rgba(77,163,255,0.3);
 }
 
 button.submit{
@@ -159,11 +129,6 @@ button.submit{
   color:white;
   font-weight:600;
   cursor:pointer;
-  transition:0.2s;
-}
-
-button.submit:hover{
-  transform:scale(1.02);
 }
 
 /* PEZINHO */
@@ -172,6 +137,8 @@ button.submit:hover{
   gap:10px;
   width:100%;
   max-width:520px;
+  align-items:center;
+  justify-content:space-between;
 }
 
 .benefit{
@@ -179,7 +146,7 @@ button.submit:hover{
   padding:12px;
   border-radius:14px;
   background:rgba(10,18,40,0.6);
-  border:1px solid rgba(120,160,255,0.2);
+  border:1px solid rgba(120,160,255,0.18);
   font-size:11px;
 }
 
@@ -187,6 +154,13 @@ button.submit:hover{
   color:#7fb2ff;
   font-size:12px;
   margin-bottom:4px;
+}
+
+/* LOGO MARCA D’ÁGUA */
+.watermark-logo{
+  width:55px;
+  opacity:0.35;
+  filter:drop-shadow(0 0 10px rgba(80,160,255,0.6));
 }
 
 /* CUTSCENE */
@@ -203,14 +177,7 @@ button.submit:hover{
 
 #cutscene img{
   width:240px;
-  animation:zoom 2.5s ease forwards;
-  filter:drop-shadow(0 0 30px rgba(80,160,255,1));
-}
-
-@keyframes zoom{
-  0%{transform:scale(0.2);opacity:0;}
-  50%{opacity:1;}
-  100%{transform:scale(1.1);opacity:1;}
+  filter:drop-shadow(0 0 25px rgba(80,160,255,0.9));
 }
 
 .zig{
@@ -218,7 +185,6 @@ button.submit:hover{
   font-size:14px;
   color:#7fb2ff;
   letter-spacing:3px;
-  text-shadow:0 0 15px rgba(80,160,255,1);
 }
 </style>
 </head>
@@ -260,9 +226,9 @@ button.submit:hover{
       <label>Por que saiu?</label><textarea></textarea>
       <label>Tempo livre</label><input>
 
-      <label>Cliente irritado?</label><textarea></textarea>
-      <label>Por que entrar?</label><textarea></textarea>
-      <label>Como ajudaria?</label><textarea></textarea>
+      <label>Cliente irritado</label><textarea></textarea>
+      <label>Por que entrar</label><textarea></textarea>
+      <label>Como ajudar</label><textarea></textarea>
 
       <label>Sobre você</label><textarea></textarea>
 
@@ -272,7 +238,9 @@ button.submit:hover{
 
   </div>
 
+  <!-- PEZINHO COM LOGO -->
   <div class="benefits-footer">
+
     <div class="benefit">
       <h3>Ambiente</h3>
       Equipe organizada.
@@ -287,6 +255,10 @@ button.submit:hover{
       <h3>Crescimento</h3>
       Evolução constante.
     </div>
+
+    <img class="watermark-logo"
+      src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/LOGO.gif">
+
   </div>
 
 </div>
@@ -297,42 +269,14 @@ button.submit:hover{
   <div class="zig">FEITO POR ZIG</div>
 </div>
 
-<!-- SONS -->
-<audio id="startSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a6c8c5.mp3"></audio>
-<audio id="clickSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a6c8c5.mp3"></audio>
-
 <script>
-let unlocked=false;
-
-const startSound=document.getElementById("startSound");
-const clickSound=document.getElementById("clickSound");
-
-function unlockAudio(){
-  const t=new Audio(startSound.src);
-  t.volume=0;
-  t.play().then(()=>{unlocked=true;}).catch(()=>{});
-}
-
-function play(a){
-  if(!unlocked) return;
-  a.currentTime=0;
-  a.volume=0.6;
-  a.play().catch(()=>{});
-}
-
 function enter(){
-  unlockAudio();
-  play(startSound);
-
   document.getElementById("entry").style.display="none";
   document.getElementById("main").style.display="flex";
 }
 
 document.getElementById("form").addEventListener("submit",(e)=>{
   e.preventDefault();
-
-  play(clickSound);
-
   document.getElementById("cutscene").style.display="flex";
 
   setTimeout(()=>{
