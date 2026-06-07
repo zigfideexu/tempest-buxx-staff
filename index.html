@@ -5,35 +5,162 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tempest Buxx - Staff</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-:root{
-  --bg:#050814;
-  --card:rgba(10,18,40,0.72);
-  --stroke:rgba(120,160,255,0.2);
-  --accent:#4da3ff;
-  --text:#dbe7ff;
-}
-
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family:"Inter",sans-serif;
+  font-family:"Plus Jakarta Sans",sans-serif;
 }
 
 body{
-  background:radial-gradient(circle at top,#0a1430,var(--bg));
+  background:#050814;
   overflow:hidden;
-  color:var(--text);
+  color:#e6f0ff;
+}
+
+/* BACKGROUND GIF */
+.bg{
+  position:fixed;
+  inset:0;
+  background:url("https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif") center/cover no-repeat;
+  filter:blur(18px) brightness(0.35);
+  transform:scale(1.1);
+  z-index:0;
+  animation:moveBg 12s ease-in-out infinite alternate;
+}
+
+@keyframes moveBg{
+  from{transform:scale(1.1) translateY(0);}
+  to{transform:scale(1.15) translateY(-10px);}
+}
+
+/* OVERLAY */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle at top,rgba(0,120,255,0.15),#050814 70%);
+  z-index:1;
 }
 
 /* PARTICLES */
 canvas{
   position:fixed;
   inset:0;
-  z-index:0;
+  z-index:2;
+}
+
+/* SOUND */
+audio{display:none;}
+
+/* CONTAINER */
+.wrapper{
+  position:relative;
+  z-index:3;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+}
+
+/* CARD */
+.card{
+  width:100%;
+  max-width:460px;
+  max-height:90vh;
+  overflow-y:auto;
+  background:rgba(10,18,35,0.75);
+  border:1px solid rgba(120,160,255,0.18);
+  border-radius:18px;
+  padding:18px;
+  backdrop-filter:blur(14px);
+  box-shadow:0 0 40px rgba(0,120,255,0.12);
+}
+
+/* HEADER */
+.header{
+  text-align:center;
+}
+
+.logo{
+  width:85px;
+  border-radius:10px;
+  filter:drop-shadow(0 0 12px rgba(80,150,255,0.8));
+}
+
+h1{
+  font-size:18px;
+  margin-top:5px;
+}
+
+.sub{
+  font-size:12px;
+  opacity:0.6;
+}
+
+/* TITLE DROP */
+.drop{
+  text-align:center;
+  margin:10px 0;
+  font-size:12px;
+  letter-spacing:4px;
+  color:#7fb2ff;
+  animation:drop 1s ease forwards;
+  opacity:0;
+  animation-delay:1.2s;
+}
+
+@keyframes drop{
+  from{transform:translateY(-20px);opacity:0;}
+  to{transform:translateY(0);opacity:1;}
+}
+
+/* LABEL */
+label{
+  display:block;
+  margin-top:12px;
+  font-size:12px;
+  opacity:0.9;
+}
+
+/* INPUT */
+input,textarea{
+  width:100%;
+  margin-top:6px;
+  padding:11px;
+  border-radius:10px;
+  border:1px solid rgba(120,160,255,0.2);
+  background:rgba(255,255,255,0.04);
+  color:white;
+  outline:none;
+  transition:0.2s;
+  font-size:13px;
+}
+
+input:focus,textarea:focus{
+  transform:scale(1.02);
+  box-shadow:0 0 0 3px rgba(80,150,255,0.15);
+  border-color:rgba(80,150,255,0.6);
+}
+
+/* BUTTON */
+button{
+  width:100%;
+  margin-top:14px;
+  padding:12px;
+  border:none;
+  border-radius:12px;
+  background:linear-gradient(90deg,#2f7bff,#4da3ff);
+  color:white;
+  font-weight:600;
+  cursor:pointer;
+}
+
+button:active{
+  transform:scale(0.97);
 }
 
 /* INTRO */
@@ -43,17 +170,15 @@ canvas{
   display:flex;
   justify-content:center;
   align-items:center;
-  background:var(--bg);
+  background:#050814;
   z-index:10;
-  flex-direction:column;
-  animation:fadeOut 1.3s ease forwards;
-  animation-delay:1.6s;
+  animation:fadeOut 1.2s ease forwards;
+  animation-delay:1.4s;
 }
 
 .intro img{
-  width:150px;
-  border-radius:12px;
-  filter:drop-shadow(0 0 20px rgba(77,163,255,0.8));
+  width:140px;
+  filter:drop-shadow(0 0 18px rgba(80,150,255,0.8));
   animation:zoom 1s ease;
 }
 
@@ -65,145 +190,23 @@ canvas{
 @keyframes fadeOut{
   to{opacity:0;visibility:hidden;}
 }
-
-/* MAIN */
-.wrapper{
-  position:relative;
-  z-index:2;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  min-height:100vh;
-  opacity:0;
-  animation:show 1s ease forwards;
-  animation-delay:2s;
-}
-
-@keyframes show{
-  to{opacity:1;}
-}
-
-/* CARD */
-.card{
-  width:460px;
-  background:var(--card);
-  border:1px solid var(--stroke);
-  border-radius:18px;
-  padding:22px;
-  backdrop-filter:blur(14px);
-  box-shadow:0 0 40px rgba(0,120,255,0.15);
-}
-
-/* HEADER */
-.header{
-  text-align:center;
-  margin-bottom:8px;
-}
-
-.logo{
-  width:90px;
-  border-radius:10px;
-  filter:drop-shadow(0 0 14px rgba(77,163,255,0.8));
-}
-
-h1{
-  font-size:18px;
-}
-
-.sub{
-  font-size:12px;
-  opacity:0.6;
-}
-
-/* FORM TITLE */
-.drop{
-  text-align:center;
-  margin:10px 0;
-  font-size:13px;
-  letter-spacing:3px;
-  color:#7fb2ff;
-  animation:drop 1s ease forwards;
-  opacity:0;
-  animation-delay:1.7s;
-}
-
-@keyframes drop{
-  from{transform:translateY(-25px);opacity:0;}
-  to{transform:translateY(0);opacity:1;}
-}
-
-/* LABELS */
-label{
-  display:flex;
-  gap:6px;
-  margin-top:12px;
-  font-size:12px;
-  opacity:0.9;
-}
-
-.symbol{
-  color:#4da3ff;
-}
-
-/* INPUTS */
-input,textarea{
-  width:100%;
-  margin-top:6px;
-  padding:10px;
-  border-radius:10px;
-  border:1px solid var(--stroke);
-  background:rgba(255,255,255,0.04);
-  color:white;
-  outline:none;
-  transition:0.2s;
-  font-size:13px;
-}
-
-/* foco premium */
-input:focus,textarea:focus{
-  transform:scale(1.02);
-  border-color:rgba(77,163,255,0.7);
-  box-shadow:0 0 0 3px rgba(77,163,255,0.12);
-}
-
-/* BUTTON */
-button{
-  width:100%;
-  margin-top:15px;
-  padding:12px;
-  border:none;
-  border-radius:12px;
-  background:linear-gradient(90deg,#2f7bff,#4da3ff);
-  color:white;
-  font-weight:600;
-  cursor:pointer;
-  transition:0.2s;
-}
-
-button:hover{
-  transform:translateY(-1px);
-  box-shadow:0 10px 25px rgba(77,163,255,0.25);
-}
-
-button:active{
-  transform:scale(0.97);
-}
 </style>
 </head>
 
 <body>
 
+<div class="bg"></div>
+<div class="overlay"></div>
+
 <canvas id="particles"></canvas>
+
+<!-- SOUND -->
+<audio id="clickSound" src="https://www.myinstants.com/media/sounds/mouse-click.mp3"></audio>
 
 <!-- INTRO -->
 <div class="intro">
   <img src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif">
 </div>
-
-<!-- SOUND -->
-<audio id="clickSound">
-  <source src="https://www.myinstants.com/media/sounds/mouse-click.mp3" type="audio/mpeg">
-</audio>
 
 <!-- MAIN -->
 <div class="wrapper">
@@ -212,53 +215,35 @@ button:active{
     <div class="header">
       <img class="logo" src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif">
       <h1>Tempest Buxx</h1>
-      <div class="sub">Staff Hiring Panel</div>
+      <div class="sub">Staff Application</div>
     </div>
 
     <div class="drop">FORMULÁRIO</div>
 
     <form>
 
-      <label><span class="symbol">💠</span>Nome</label>
-      <input type="text">
+      <label>Nome</label>
+      <input>
 
-      <label><span class="symbol">💠</span>Usuário do Discord</label>
-      <input type="text">
+      <label>Discord</label>
+      <input>
 
-      <label><span class="symbol">❓</span>Idade</label>
+      <label>Idade</label>
       <input type="number">
 
-      <label><span class="symbol">💠</span>Há quanto tempo usa Discord?</label>
-      <input type="text">
-
-      <label><span class="symbol">💠</span>Já foi staff antes?</label>
+      <label>Experiência no Discord</label>
       <textarea rows="2"></textarea>
 
-      <label><span class="symbol">💠</span>Se sim, onde?</label>
+      <label>Já foi staff?</label>
       <textarea rows="2"></textarea>
 
-      <label><span class="symbol">💠</span>Cargo anterior</label>
-      <input type="text">
-
-      <label><span class="symbol">💠</span>Por que saiu?</label>
+      <label>Por que quer entrar?</label>
       <textarea rows="2"></textarea>
 
-      <label><span class="symbol">💠</span>Tempo livre diário</label>
-      <input type="text">
-
-      <label><span class="symbol">❓</span>Como lidaria com alguém irritado?</label>
-      <textarea rows="2"></textarea>
-
-      <label><span class="symbol">💠</span>Por que quer entrar na Tempest Buxx?</label>
-      <textarea rows="2"></textarea>
-
-      <label><span class="symbol">💠</span>Como ajudaria o servidor?</label>
-      <textarea rows="2"></textarea>
-
-      <label><span class="symbol">💠</span>Fale sobre você</label>
+      <label>Sobre você</label>
       <textarea rows="3"></textarea>
 
-      <button type="button">Enviar candidatura</button>
+      <button>Enviar candidatura</button>
 
     </form>
 
@@ -274,21 +259,19 @@ canvas.width=innerWidth;
 canvas.height=innerHeight;
 
 let p=[];
-
-for(let i=0;i<55;i++){
+for(let i=0;i<50;i++){
   p.push({
     x:Math.random()*canvas.width,
     y:Math.random()*canvas.height,
     r:Math.random()*1.2,
-    dx:(Math.random()-0.5)*0.35,
-    dy:(Math.random()-0.5)*0.35
+    dx:(Math.random()-0.5)*0.3,
+    dy:(Math.random()-0.5)*0.3
   });
 }
 
 function anim(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
-
-  ctx.fillStyle="rgba(120,160,255,0.4)";
+  ctx.fillStyle="rgba(120,160,255,0.35)";
 
   p.forEach(e=>{
     ctx.beginPath();
@@ -306,12 +289,12 @@ function anim(){
 }
 anim();
 
-/* SOUND - seguro (browser unlock) */
+/* CLICK SOUND (mobile safe) */
 const sound=document.getElementById("clickSound");
 document.querySelectorAll("input,textarea").forEach(el=>{
   el.addEventListener("focus",()=>{
     sound.currentTime=0;
-    sound.play();
+    sound.play().catch(()=>{});
   });
 });
 </script>
