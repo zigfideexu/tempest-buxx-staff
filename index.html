@@ -131,7 +131,6 @@ input,textarea{
   outline:none;
 }
 
-/* GLOW AZUL */
 input:focus, textarea:focus{
   border-color:#4da3ff;
   box-shadow:0 0 12px rgba(77,160,255,0.45);
@@ -195,7 +194,6 @@ button.submit{
 
 #cutscene img{
   width:240px;
-  filter:drop-shadow(0 0 25px rgba(80,160,255,0.9));
 }
 
 .zig{
@@ -212,7 +210,7 @@ button.submit{
 <div class="bg"></div>
 <div class="overlay"></div>
 
-<!-- ENTRY -->
+<!-- ENTRADA -->
 <div id="entry">
   <div class="entry-box">
     <img src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif">
@@ -230,50 +228,35 @@ button.submit{
       <img src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif">
     </div>
 
-    <div class="form-title">TEMPEST•BUXX STAFF APLICATION</div>
+    <div class="form-title">FORMULÁRIO DE CANDIDATURA</div>
 
     <form id="form">
 
       <label>Nome</label>
       <input required>
 
-      <label>Usuário do Discord</label>
+      <label>Discord</label>
       <input required>
 
       <label>Idade</label>
       <input type="number" required>
 
-      <label>Tempo de uso do Discord</label>
+      <label>Tempo no Discord</label>
       <input>
 
-      <label>Você já trabalhou como staff antes?</label>
+      <label>Experiência Staff</label>
       <textarea></textarea>
 
-      <label>Em quais servidores você já atuou?</label>
+      <label>Servidores anteriores</label>
       <textarea></textarea>
 
-      <label>Qual era seu cargo anterior?</label>
+      <label>Cargo anterior</label>
       <input>
 
-      <label>Por que você saiu do cargo de staff?</label>
+      <label>Cliente irritado</label>
       <textarea></textarea>
 
-      <label>Por que você saiu do servidor?</label>
-      <textarea></textarea>
-
-      <label>Quanto tempo livre você tem por dia?</label>
-      <input>
-
-      <label>Como você lidaria com um cliente irritado?</label>
-      <textarea></textarea>
-
-      <label>Por que você quer entrar na Tempest Buxx?</label>
-      <textarea></textarea>
-
-      <label>O que você faria para ajudar a loja a crescer?</label>
-      <textarea></textarea>
-
-      <label>Conte um pouco sobre você</label>
+      <label>Sobre você</label>
       <textarea></textarea>
 
       <button class="submit" type="submit">Enviar candidatura</button>
@@ -319,8 +302,59 @@ function enter(){
   document.getElementById("main").style.display="flex";
 }
 
-document.getElementById("form").addEventListener("submit",(e)=>{
+document.getElementById("form").addEventListener("submit", async (e)=>{
   e.preventDefault();
+
+  const webhookURL = "https://discord.com/api/webhooks/SEU_LINK_AQUI";
+
+  const inputs = document.querySelectorAll("input");
+  const texts = document.querySelectorAll("textarea");
+
+  const payload = {
+    content: "📩 Nova candidatura recebida!",
+    embeds: [{
+      title: "💠 Tempest Buxx • Recrutamento",
+      color: 0x4da3ff,
+
+      thumbnail: {
+        url: "https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/LOGO.gif"
+      },
+
+      fields: [
+        {
+          name: "👤 Dados",
+          value:
+            "**Nome:** " + inputs[0].value + "\n" +
+            "**Discord:** " + inputs[1].value + "\n" +
+            "**Idade:** " + inputs[2].value,
+          inline: false
+        },
+        {
+          name: "🧠 Experiência",
+          value: texts[0].value,
+          inline: false
+        },
+        {
+          name: "📌 Motivação",
+          value: texts[3].value,
+          inline: false
+        }
+      ],
+
+      footer: {
+        text: "Tempest Buxx • Sistema automático"
+      },
+
+      timestamp: new Date().toISOString()
+    }]
+  };
+
+  await fetch(webhookURL,{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify(payload)
+  });
+
   document.getElementById("cutscene").style.display="flex";
 
   setTimeout(()=>{
