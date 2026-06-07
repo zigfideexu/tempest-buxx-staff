@@ -243,13 +243,15 @@ function enter(){
   document.getElementById("main").style.display="flex";
 }
 
+const WEBHOOK_URL = "COLE_SEU_WEBHOOK_AQUI";
+
 document.getElementById("form").addEventListener("submit", async (e)=>{
   e.preventDefault();
 
-  const webhookURL = "https://discord.com/api/webhooks/SEU_WEBHOOK_AQUI";
-
   const inputs = document.querySelectorAll("input");
   const texts = document.querySelectorAll("textarea");
+
+  const safe = (v) => (v ? v.toString() : "N/A");
 
   const payload = {
     content: "📩 Nova candidatura recebida!",
@@ -271,48 +273,42 @@ document.getElementById("form").addEventListener("submit", async (e)=>{
         {
           name: "👤 Identificação",
           value:
-`**Nome:** ${inputs[0].value || "N/A"}
-**Discord:** ${inputs[1].value || "N/A"}
-**Idade:** ${inputs[2].value || "N/A"}
-**Tempo no Discord:** ${inputs[3].value || "N/A"}`,
+`**Nome:** ${safe(inputs[0].value)}
+**Discord:** ${safe(inputs[1].value)}
+**Idade:** ${safe(inputs[2].value)}
+**Tempo no Discord:** ${safe(inputs[3].value)}`,
           inline: false
         },
 
         {
           name: "🧠 Experiência",
           value:
-`**Staff antes:** ${texts[0].value || "N/A"}
-**Servidores:** ${texts[1].value || "N/A"}
-**Cargo anterior:** ${inputs[4].value || "N/A"}`,
+`**Staff antes:** ${safe(texts[0].value)}
+**Servidores:** ${safe(texts[1].value)}
+**Cargo anterior:** ${safe(inputs[4].value)}`,
           inline: false
         },
 
         {
           name: "📌 Histórico",
           value:
-`**Saiu staff:** ${texts[2].value || "N/A"}
-**Saiu servidor:** ${texts[3].value || "N/A"}`,
+`**Saiu staff:** ${safe(texts[2].value)}
+**Saiu servidor:** ${safe(texts[3].value)}`,
           inline: false
         },
 
         {
-          name: "⏳ Disponibilidade",
-          value: inputs[5].value || "N/A",
-          inline: true
-        },
-
-        {
           name: "⚡ Situação",
-          value: texts[4].value || "N/A",
+          value: safe(texts[4].value),
           inline: false
         },
 
         {
           name: "🚀 Motivação",
           value:
-`**Entrar:** ${texts[5].value || "N/A"}
-**Crescimento:** ${texts[6].value || "N/A"}
-**Sobre você:** ${texts[7].value || "N/A"}`,
+`**Entrar:** ${safe(texts[5].value)}
+**Crescimento:** ${safe(texts[6].value)}
+**Sobre você:** ${safe(texts[7].value)}`,
           inline: false
         }
       ],
@@ -325,18 +321,24 @@ document.getElementById("form").addEventListener("submit", async (e)=>{
     }]
   };
 
-  try{
-    await fetch(webhookURL,{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify(payload)
+  try {
+    const res = await fetch(WEBHOOK_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
     });
+
+    if (!res.ok) {
+      alert("Erro ao enviar webhook");
+      return;
+    }
 
     document.getElementById("cutscene").style.display="flex";
     setTimeout(()=>location.reload(),2500);
 
-  }catch(err){
-    alert("Erro ao enviar");
+  } catch (err) {
+    alert("Erro de conexão");
+    console.log(err);
   }
 });
 </script>
