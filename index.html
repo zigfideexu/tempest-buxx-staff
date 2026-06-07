@@ -251,35 +251,99 @@ document.getElementById("form").addEventListener("submit", async (e)=>{
   const texts = document.querySelectorAll("textarea");
 
   const payload = {
-    content: "📩 Nova candidatura recebida!",
-    embeds: [{
-      title: "Tempest Buxx • Recrutamento",
-      color: 0x4da3ff,
-      fields: [
-        { name:"Nome", value:inputs[0].value },
-        { name:"Discord", value:inputs[1].value },
-        { name:"Idade", value:inputs[2].value },
-        { name:"Tempo Discord", value:inputs[3].value },
+  content: "📩 **Nova candidatura recebida!**",
+  embeds: [{
+    title: "💠 Tempest Buxx • Recrutamento",
+    color: 0x4da3ff,
+    thumbnail: {
+      url: "https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/LOGO.gif"
+    },
 
-        { name:"Staff antes?", value:texts[0].value },
-        { name:"Servidores", value:texts[1].value },
+    fields: [
+      {
+        name: "👤 Nome",
+        value: inputs[0].value || "N/A",
+        inline: true
+      },
+      {
+        name: "💬 Discord",
+        value: inputs[1].value || "N/A",
+        inline: true
+      },
+      {
+        name: "🎂 Idade",
+        value: inputs[2].value || "N/A",
+        inline: true
+      },
 
-        { name:"Cargo anterior", value:inputs[4].value },
+      {
+        name: "⏱️ Tempo no Discord",
+        value: inputs[3].value || "N/A",
+        inline: false
+      },
 
-        { name:"Saiu staff", value:texts[2].value },
-        { name:"Saiu servidor", value:texts[3].value },
+      {
+        name: "🧠 Experiência como staff",
+        value: texts[0].value || "N/A",
+        inline: false
+      },
 
-        { name:"Tempo livre", value:inputs[5].value },
+      {
+        name: "🏢 Servidores anteriores",
+        value: texts[1].value || "N/A",
+        inline: false
+      },
 
-        { name:"Cliente irritado", value:texts[4].value },
+      {
+        name: "❓ Motivo de saída",
+        value: texts[2].value || "N/A",
+        inline: false
+      },
 
-        { name:"Entrar na loja", value:texts[5].value },
-        { name:"Ajudar crescimento", value:texts[6].value },
+      {
+        name: "🚪 Saiu do servidor por quê?",
+        value: texts[3].value || "N/A",
+        inline: false
+      },
 
-        { name:"Sobre você", value:texts[7].value }
-      ]
-    }]
-  };
+      {
+        name: "⏳ Tempo livre",
+        value: inputs[5].value || "N/A",
+        inline: true
+      },
+
+      {
+        name: "😡 Cliente irritado",
+        value: texts[4].value || "N/A",
+        inline: false
+      },
+
+      {
+        name: "🚀 Por que entrar",
+        value: texts[5].value || "N/A",
+        inline: false
+      },
+
+      {
+        name: "📈 Ajudar crescimento",
+        value: texts[6].value || "N/A",
+        inline: false
+      },
+
+      {
+        name: "🧾 Sobre você",
+        value: texts[7].value || "N/A",
+        inline: false
+      }
+    ],
+
+    footer: {
+      text: "Tempest Buxx • Sistema de Recrutamento"
+    },
+
+    timestamp: new Date().toISOString()
+  }]
+};
 
   try{
     await fetch(webhookURL,{
