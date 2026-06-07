@@ -126,11 +126,6 @@ input,textarea{
   outline:none;
 }
 
-input:focus, textarea:focus{
-  border-color:#4da3ff;
-  box-shadow:0 0 12px rgba(77,160,255,0.45);
-}
-
 button.submit{
   width:100%;
   margin-top:14px;
@@ -141,35 +136,6 @@ button.submit{
   color:white;
   font-weight:600;
   cursor:pointer;
-}
-
-.benefits-footer{
-  display:flex;
-  gap:10px;
-  width:100%;
-  max-width:520px;
-  align-items:center;
-}
-
-.benefit{
-  flex:1;
-  padding:12px;
-  border-radius:14px;
-  background:rgba(10,18,40,0.6);
-  border:1px solid rgba(120,160,255,0.18);
-  font-size:11px;
-}
-
-.benefit h3{
-  color:#7fb2ff;
-  font-size:12px;
-  margin-bottom:4px;
-}
-
-.watermark-logo{
-  width:55px;
-  opacity:0.35;
-  filter:drop-shadow(0 0 10px rgba(80,160,255,0.6));
 }
 
 #cutscene{
@@ -191,7 +157,6 @@ button.submit{
   margin-top:20px;
   font-size:14px;
   color:#7fb2ff;
-  letter-spacing:3px;
 }
 </style>
 </head>
@@ -224,7 +189,7 @@ button.submit{
       <label>Nome</label>
       <input required>
 
-      <label>Usuário Discord</label>
+      <label>Discord</label>
       <input required>
 
       <label>Idade</label>
@@ -269,28 +234,6 @@ button.submit{
 
   </div>
 
-  <div class="benefits-footer">
-
-    <div class="benefit">
-      <h3>Ambiente</h3>
-      Equipe organizada.
-    </div>
-
-    <div class="benefit">
-      <h3>Benefícios</h3>
-      Comissões exclusivas.
-    </div>
-
-    <div class="benefit">
-      <h3>Crescimento</h3>
-      Evolução constante.
-    </div>
-
-    <img class="watermark-logo"
-      src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/LOGO.gif">
-
-  </div>
-
 </div>
 
 <div id="cutscene">
@@ -318,39 +261,50 @@ document.getElementById("form").addEventListener("submit", async (e)=>{
       title: "Tempest Buxx • Recrutamento",
       color: 0x4da3ff,
       fields: [
-        { name:"Nome", value:inputs[0].value, inline:false },
-        { name:"Discord", value:inputs[1].value, inline:false },
-        { name:"Idade", value:inputs[2].value, inline:false },
-        { name:"Tempo Discord", value:inputs[3].value, inline:false },
+        { name:"Nome", value:inputs[0].value || "N/A", inline:false },
+        { name:"Discord", value:inputs[1].value || "N/A", inline:false },
+        { name:"Idade", value:inputs[2].value || "N/A", inline:false },
+        { name:"Tempo no Discord", value:inputs[3].value || "N/A", inline:false },
 
-        { name:"Staff antes?", value:texts[0].value, inline:false },
-        { name:"Servidores", value:texts[1].value, inline:false },
+        { name:"Staff antes?", value:texts[0].value || "N/A", inline:false },
+        { name:"Servidores", value:texts[1].value || "N/A", inline:false },
 
-        { name:"Cargo anterior", value:inputs[4].value, inline:false },
+        { name:"Cargo anterior", value:inputs[4].value || "N/A", inline:false },
 
-        { name:"Saiu staff", value:texts[2].value, inline:false },
-        { name:"Saiu servidor", value:texts[3].value, inline:false },
+        { name:"Saiu staff", value:texts[2].value || "N/A", inline:false },
+        { name:"Saiu servidor", value:texts[3].value || "N/A", inline:false },
 
-        { name:"Tempo livre", value:inputs[5].value, inline:false },
+        { name:"Tempo livre", value:inputs[5].value || "N/A", inline:false },
 
-        { name:"Cliente irritado", value:texts[4].value, inline:false },
+        { name:"Cliente irritado?", value:texts[4].value || "N/A", inline:false },
 
-        { name:"Entrar na loja", value:texts[5].value, inline:false },
-        { name:"Ajudar crescimento", value:texts[6].value, inline:false },
+        { name:"Entrar na loja", value:texts[5].value || "N/A", inline:false },
+        { name:"Ajudar crescimento", value:texts[6].value || "N/A", inline:false },
 
-        { name:"Sobre você", value:texts[7].value, inline:false }
+        { name:"Sobre você", value:texts[7].value || "N/A", inline:false }
       ]
     }]
   };
 
-  await fetch(webhookURL,{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify(payload)
-  });
+  try{
+    const res = await fetch(webhookURL,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(payload)
+    });
 
-  document.getElementById("cutscene").style.display="flex";
-  setTimeout(()=>location.reload(),2500);
+    if(!res.ok){
+      alert("Erro no webhook: " + res.status);
+      return;
+    }
+
+    document.getElementById("cutscene").style.display="flex";
+    setTimeout(()=>location.reload(),2500);
+
+  }catch(err){
+    alert("Erro de conexão");
+    console.error(err);
+  }
 });
 </script>
 
