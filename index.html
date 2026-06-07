@@ -1,196 +1,167 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tempest Buxx - Staff</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tempest Buxx - Staff</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: radial-gradient(circle at top, #07102a, #050814);
-      color: #d6e4ff;
-      overflow-x: hidden;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: radial-gradient(circle at top, #070c1a, #050814);
+  color: #d6e4ff;
+  overflow: hidden;
+}
 
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 0;
-    }
+/* partículas */
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
 
-    .container {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 25px;
-    }
+/* tela de entrada */
+.intro {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #050814;
+  z-index: 5;
+  flex-direction: column;
+  animation: fadeOut 1s ease forwards;
+  animation-delay: 1.2s;
+}
 
-    .card {
-      width: 460px;
-      background: rgba(10, 18, 40, 0.75);
-      border: 1px solid rgba(80, 140, 255, 0.35);
-      border-radius: 18px;
-      padding: 25px;
-      box-shadow: 0 0 30px rgba(0,120,255,0.25);
-      backdrop-filter: blur(8px);
-      position: relative;
-      overflow: hidden;
-    }
+.intro img {
+  width: 140px;
+  border-radius: 12px;
+  filter: drop-shadow(0 0 15px rgba(0,140,255,0.8));
+  animation: zoomIn 1s ease;
+}
 
-    /* decoração azul lateral */
-    .card::before {
-      content: "✦ ✧ ✦";
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      color: rgba(120,170,255,0.4);
-      font-size: 14px;
-    }
+@keyframes zoomIn {
+  from { transform: scale(0.6); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
 
-    .banner {
-      width: 100%;
-      height: 120px;
-      background: linear-gradient(90deg, rgba(0,120,255,0.2), rgba(0,60,150,0.1));
-      border-radius: 14px;
-      margin-bottom: 15px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 22px;
-      font-weight: bold;
-      color: #bcd7ff;
-      box-shadow: inset 0 0 20px rgba(0,120,255,0.2);
-    }
+@keyframes fadeOut {
+  to { opacity: 0; visibility: hidden; }
+}
 
-    .logo {
-      display: block;
-      margin: 10px auto;
-      width: 130px;
-      border-radius: 14px;
-      filter: drop-shadow(0 0 14px rgba(0,140,255,0.8));
-      transition: 0.3s;
-    }
+/* conteúdo */
+.container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  opacity: 0;
+  animation: showForm 0.8s ease forwards;
+  animation-delay: 1.4s;
+}
 
-    .logo:hover {
-      transform: scale(1.05);
-      filter: drop-shadow(0 0 20px rgba(0,170,255,1));
-    }
+@keyframes showForm {
+  to { opacity: 1; }
+}
 
-    h1 {
-      text-align: center;
-      margin: 5px 0;
-      color: #cfe3ff;
-      letter-spacing: 1px;
-    }
+.card {
+  width: 420px;
+  background: rgba(10, 18, 40, 0.72);
+  border: 1px solid rgba(90, 140, 255, 0.25);
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: 0 0 25px rgba(0,120,255,0.15);
+  backdrop-filter: blur(10px);
+}
 
-    .subtitle {
-      text-align: center;
-      opacity: 0.7;
-      margin-bottom: 15px;
-    }
+h1 {
+  text-align: center;
+  margin: 5px 0;
+}
 
-    label {
-      font-size: 13px;
-      opacity: 0.9;
-    }
+.subtitle {
+  text-align: center;
+  opacity: 0.7;
+  margin-bottom: 15px;
+}
 
-    input, textarea {
-      width: 100%;
-      padding: 9px;
-      margin: 6px 0 12px;
-      border-radius: 10px;
-      border: 1px solid rgba(120,170,255,0.2);
-      background: rgba(255,255,255,0.06);
-      color: white;
-      outline: none;
-      transition: 0.2s;
-    }
+label {
+  font-size: 13px;
+}
 
-    input:focus, textarea:focus {
-      border: 1px solid rgba(120,170,255,0.6);
-      box-shadow: 0 0 10px rgba(0,120,255,0.2);
-    }
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 6px 0 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(120,170,255,0.2);
+  background: rgba(255,255,255,0.06);
+  color: white;
+  transition: 0.2s;
+}
 
-    button {
-      width: 100%;
-      padding: 11px;
-      border: none;
-      border-radius: 12px;
-      background: linear-gradient(90deg, #1a5cff, #3477ff);
-      color: white;
-      cursor: pointer;
-      font-weight: bold;
-      transition: 0.2s;
-    }
+input:focus, textarea:focus {
+  transform: scale(1.02);
+  box-shadow: 0 0 12px rgba(0,140,255,0.3);
+}
 
-    button:hover {
-      transform: scale(1.03);
-      box-shadow: 0 0 15px rgba(0,120,255,0.4);
-    }
+button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #1a5cff, #2f7bff);
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
 
-    .symbols {
-      text-align: center;
-      margin: 10px 0;
-      color: rgba(120,170,255,0.6);
-      letter-spacing: 6px;
-      font-size: 14px;
-    }
-  </style>
+button:active {
+  transform: scale(0.97);
+}
+</style>
 </head>
 
 <body>
 
 <canvas id="particles"></canvas>
 
+<!-- INTRO ANIMATION -->
+<div class="intro">
+  <img src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif">
+</div>
+
+<!-- FORM -->
 <div class="container">
   <div class="card">
-
-    <!-- BANNER GRANDE -->
-    <div class="banner">✦ TEMPEST BUXX STAFF PANEL ✦</div>
-
-    <!-- LOGO -->
-    <img class="logo"
-      src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif">
-
-    <div class="symbols">✦ ✧ ✦ ✧ ✦</div>
 
     <h1>Tempest Buxx</h1>
     <p class="subtitle">Candidatura para Staff</p>
 
     <form>
 
-      <label>Qual seu nome?</label>
+      <label>Nome</label>
       <input type="text" required>
 
-      <label>Qual seu usuário do Discord?</label>
+      <label>Discord</label>
       <input type="text" required>
 
-      <label>Qual sua idade?</label>
+      <label>Idade</label>
       <input type="number" required>
 
-      <label>Há quanto tempo usa Discord?</label>
-      <input type="text">
-
-      <label>Já trabalhou como staff antes?</label>
+      <label>Experiência</label>
       <textarea rows="3"></textarea>
 
-      <label>Se sim, em quais servidores?</label>
+      <label>Por que entrar?</label>
       <textarea rows="3"></textarea>
 
-      <label>Por que quer entrar na Tempest Buxx?</label>
-      <textarea rows="3"></textarea>
-
-      <label>O que você faria para ajudar a loja?</label>
-      <textarea rows="3"></textarea>
-
-      <button type="submit">Enviar Candidatura</button>
+      <button type="submit">Enviar</button>
 
     </form>
 
@@ -206,20 +177,20 @@ canvas.height = window.innerHeight;
 
 let particles = [];
 
-for (let i = 0; i < 70; i++) {
+for (let i = 0; i < 55; i++) {
   particles.push({
     x: Math.random() * canvas.width,
     y: Math.random() * canvas.height,
-    r: Math.random() * 2,
-    dx: (Math.random() - 0.5) * 0.6,
-    dy: (Math.random() - 0.5) * 0.6
+    r: Math.random() * 1.8,
+    dx: (Math.random() - 0.5) * 0.4,
+    dy: (Math.random() - 0.5) * 0.4
   });
 }
 
 function animate() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  ctx.fillStyle = "rgba(120,170,255,0.6)";
+  ctx.fillStyle = "rgba(120,170,255,0.5)";
 
   particles.forEach(p => {
     ctx.beginPath();
@@ -240,4 +211,4 @@ animate();
 </script>
 
 </body>
-</html>
+</html>    
