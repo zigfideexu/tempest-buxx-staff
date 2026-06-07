@@ -103,6 +103,18 @@ body{
   filter:drop-shadow(0 0 20px rgba(80,160,255,0.9));
 }
 
+/* 🔵 TÍTULO ADICIONADO (SÓ ISSO NOVO) */
+.form-title{
+  text-align:center;
+  margin-top:10px;
+  margin-bottom:10px;
+  font-size:14px;
+  letter-spacing:2px;
+  color:#7fb2ff;
+  text-transform:uppercase;
+  text-shadow:0 0 10px rgba(80,160,255,0.4);
+}
+
 /* INPUTS */
 label{
   display:block;
@@ -121,7 +133,6 @@ input,textarea{
   outline:none;
 }
 
-/* GLOW AZUL CORRIGIDO */
 input:focus, textarea:focus{
   border-color:#4da3ff;
   box-shadow:0 0 12px rgba(77,160,255,0.45);
@@ -146,175 +157,10 @@ button.submit{
   gap:10px;
   width:100%;
   max-width:520px;
-  align-items:center;
 }
 
 .benefit{
   flex:1;
   padding:12px;
   border-radius:14px;
-  background:rgba(10,18,40,0.6);
-  border:1px solid rgba(120,160,255,0.18);
-  font-size:11px;
-}
-
-.benefit h3{
-  color:#7fb2ff;
-  font-size:12px;
-  margin-bottom:4px;
-}
-
-/* MARCA D’ÁGUA */
-.watermark-logo{
-  width:55px;
-  opacity:0.35;
-  filter:drop-shadow(0 0 10px rgba(80,160,255,0.6));
-}
-
-/* CUTSCENE */
-#cutscene{
-  position:fixed;
-  inset:0;
-  display:none;
-  justify-content:center;
-  align-items:center;
-  background:rgba(0,0,0,0.92);
-  z-index:99999;
-  flex-direction:column;
-}
-
-#cutscene img{
-  width:240px;
-  filter:drop-shadow(0 0 25px rgba(80,160,255,0.9));
-}
-
-.zig{
-  margin-top:20px;
-  font-size:14px;
-  color:#7fb2ff;
-  letter-spacing:3px;
-}
-</style>
-</head>
-
-<body>
-
-<div class="bg"></div>
-<div class="overlay"></div>
-
-<!-- ENTRY -->
-<div id="entry">
-  <div class="entry-box">
-    <img src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif">
-    <br>
-    <button onclick="enter()">Entrar</button>
-  </div>
-</div>
-
-<!-- MAIN -->
-<div class="wrapper" id="main">
-
-  <div class="card">
-
-    <div class="form-header">
-      <img src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif">
-    </div>
-
-    <form id="form">
-
-      <label>Nome</label>
-      <input required>
-
-      <label>Usuário do Discord</label>
-      <input required>
-
-      <label>Idade</label>
-      <input type="number" required>
-
-      <label>Tempo de uso do Discord</label>
-      <input>
-
-      <label>Você já trabalhou como staff antes?</label>
-      <textarea></textarea>
-
-      <label>Em quais servidores você já atuou?</label>
-      <textarea></textarea>
-
-      <label>Qual era seu cargo anterior?</label>
-      <input>
-
-      <label>Por que você saiu do cargo de staff?</label>
-      <textarea></textarea>
-
-      <label>Por que você saiu do servidor?</label>
-      <textarea></textarea>
-
-      <label>Quanto tempo livre você tem por dia?</label>
-      <input>
-
-      <label>Como você lidaria com um cliente irritado?</label>
-      <textarea></textarea>
-
-      <label>Por que você quer entrar na Tempest Buxx?</label>
-      <textarea></textarea>
-
-      <label>O que você faria para ajudar a loja a crescer?</label>
-      <textarea></textarea>
-
-      <label>Conte um pouco sobre você</label>
-      <textarea></textarea>
-
-      <button class="submit" type="submit">Enviar candidatura</button>
-
-    </form>
-
-  </div>
-
-  <div class="benefits-footer">
-
-    <div class="benefit">
-      <h3>Ambiente</h3>
-      Equipe organizada.
-    </div>
-
-    <div class="benefit">
-      <h3>Benefícios</h3>
-      Comissões exclusivas.
-    </div>
-
-    <div class="benefit">
-      <h3>Crescimento</h3>
-      Evolução constante.
-    </div>
-
-    <img class="watermark-logo"
-      src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/LOGO.gif">
-
-  </div>
-
-</div>
-
-<!-- CUTSCENE -->
-<div id="cutscene">
-  <img src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/LOGO.gif">
-  <div class="zig">FEITO POR ZIG</div>
-</div>
-
-<script>
-function enter(){
-  document.getElementById("entry").style.display="none";
-  document.getElementById("main").style.display="flex";
-}
-
-document.getElementById("form").addEventListener("submit",(e)=>{
-  e.preventDefault();
-  document.getElementById("cutscene").style.display="flex";
-
-  setTimeout(()=>{
-    location.reload();
-  },2500);
-});
-</script>
-
-</body>
-</html>
+  background:rgba(10,18,
