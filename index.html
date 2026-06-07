@@ -37,6 +37,7 @@ body{
   z-index:1;
 }
 
+/* ENTRY */
 #entry{
   position:fixed;
   inset:0;
@@ -63,6 +64,7 @@ body{
   cursor:pointer;
 }
 
+/* WRAPPER */
 .wrapper{
   display:none;
   position:relative;
@@ -75,6 +77,7 @@ body{
   padding:15px;
 }
 
+/* CARD */
 .card{
   width:100%;
   max-width:520px;
@@ -134,6 +137,7 @@ button.submit{
   cursor:pointer;
 }
 
+/* CUTSCENE */
 #cutscene{
   position:fixed;
   inset:0;
@@ -161,6 +165,7 @@ button.submit{
 <div class="bg"></div>
 <div class="overlay"></div>
 
+<!-- ENTRY -->
 <div id="entry">
   <div class="entry-box">
     <img src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif">
@@ -169,6 +174,7 @@ button.submit{
   </div>
 </div>
 
+<!-- MAIN -->
 <div class="wrapper" id="main">
 
   <div class="card">
@@ -231,6 +237,7 @@ button.submit{
 
 </div>
 
+<!-- CUTSCENE -->
 <div id="cutscene">
   <img src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/LOGO.gif">
   <div class="zig">FEITO POR ZIG</div>
@@ -238,13 +245,18 @@ button.submit{
 
 <script>
 function enter(){
-  document.getElementById("entry").style.display="none";
-  document.getElementById("main").style.display="flex";
+  document.getElementById("entry").style.display = "none";
+  document.getElementById("main").style.display = "flex";
 }
+
+window.onload = function(){
+  document.getElementById("main").style.display = "none";
+  document.getElementById("entry").style.display = "flex";
+};
 
 const WEBHOOK_URL = "COLE_SEU_WEBHOOK_AQUI";
 
-const safe = (v) => (v ? v.toString().trim().slice(0, 1000) : "N/A");
+const safe = (v) => v ? v.toString().trim().slice(0,1000) : "N/A";
 
 document.getElementById("form").addEventListener("submit", async (e)=>{
   e.preventDefault();
