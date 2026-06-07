@@ -124,7 +124,7 @@ input,textarea{
 /* GLOW AZUL CORRIGIDO */
 input:focus, textarea:focus{
   border-color:#4da3ff;
-  box-shadow:0 0 12px rgba(77,163,255,0.45);
+  box-shadow:0 0 12px rgba(77,160,255,0.45);
 }
 
 /* BOTÃO */
@@ -146,6 +146,7 @@ button.submit{
   gap:10px;
   width:100%;
   max-width:520px;
+  align-items:center;
 }
 
 .benefit{
@@ -161,6 +162,13 @@ button.submit{
   color:#7fb2ff;
   font-size:12px;
   margin-bottom:4px;
+}
+
+/* MARCA D’ÁGUA */
+.watermark-logo{
+  width:55px;
+  opacity:0.35;
+  filter:drop-shadow(0 0 10px rgba(80,160,255,0.6));
 }
 
 /* CUTSCENE */
@@ -232,7 +240,7 @@ button.submit{
       <label>Em quais servidores você já atuou?</label>
       <textarea></textarea>
 
-      <label>Qual era o seu cargo anterior?</label>
+      <label>Qual era seu cargo anterior?</label>
       <input>
 
       <label>Por que você saiu do cargo de staff?</label>
@@ -263,6 +271,7 @@ button.submit{
   </div>
 
   <div class="benefits-footer">
+
     <div class="benefit">
       <h3>Ambiente</h3>
       Equipe organizada.
@@ -277,6 +286,10 @@ button.submit{
       <h3>Crescimento</h3>
       Evolução constante.
     </div>
+
+    <img class="watermark-logo"
+      src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/LOGO.gif">
+
   </div>
 
 </div>
