@@ -34,21 +34,56 @@ body{
 .overlay{
   position:fixed;
   inset:0;
-  background:radial-gradient(circle at top,#0a1a3a88,#050814 70%);
+  background:radial-gradient(circle,#0a1a3a88,#050814 70%);
   z-index:1;
+}
+
+/* ENTRY */
+#entry{
+  position:fixed;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:rgba(0,0,0,0.92);
+  z-index:9999;
+}
+
+.entry-box{
+  text-align:center;
+  padding:25px;
+  border-radius:16px;
+  background:rgba(10,18,40,0.7);
+  border:1px solid rgba(120,160,255,0.2);
+}
+
+.entry-box img{
+  width:120px;
+  border-radius:12px;
+  margin-bottom:10px;
+}
+
+.entry-box button{
+  padding:10px 18px;
+  border:none;
+  border-radius:10px;
+  background:linear-gradient(90deg,#2f7bff,#4da3ff);
+  color:white;
+  cursor:pointer;
+  font-weight:600;
 }
 
 /* MAIN */
 .wrapper{
   position:relative;
   z-index:3;
-  display:flex;
+  display:none;
   justify-content:center;
   align-items:center;
   height:100vh;
-  padding:18px;
   flex-direction:column;
   gap:12px;
+  padding:18px;
 }
 
 .card{
@@ -61,22 +96,9 @@ body{
   border-radius:18px;
   padding:20px;
   backdrop-filter:blur(14px);
-  box-shadow:0 0 40px rgba(0,120,255,0.12);
 }
 
-.header{
-  text-align:center;
-}
-
-.logo{
-  width:85px;
-  border-radius:10px;
-  filter:drop-shadow(0 0 14px rgba(90,160,255,0.8));
-}
-
-h1{font-size:18px;}
-.sub{font-size:12px;opacity:0.6;}
-
+/* FORM */
 label{
   display:block;
   margin-top:12px;
@@ -91,12 +113,9 @@ input,textarea{
   border:1px solid rgba(120,160,255,0.18);
   background:rgba(255,255,255,0.04);
   color:white;
-  outline:none;
 }
 
-textarea{resize:none;}
-
-button{
+button.submit{
   width:100%;
   margin-top:14px;
   padding:12px;
@@ -108,12 +127,12 @@ button{
   cursor:pointer;
 }
 
-/* ===== PEZINHO ===== */
+/* PEZINHO */
 .benefits-footer{
   display:flex;
   gap:10px;
-  max-width:520px;
   width:100%;
+  max-width:520px;
 }
 
 .benefit{
@@ -125,11 +144,7 @@ button{
   font-size:11px;
 }
 
-.benefit h3{
-  font-size:12px;
-  margin-bottom:4px;
-  color:#7fb2ff;
-}
+.benefit h3{color:#7fb2ff;font-size:12px;margin-bottom:4px;}
 
 /* LOGO CANTO */
 .corner-logo{
@@ -141,7 +156,7 @@ button{
   z-index:10;
 }
 
-/* ===== CUTSCENE FINAL ===== */
+/* CUTSCENE */
 #cutscene{
   position:fixed;
   inset:0;
@@ -149,19 +164,18 @@ button{
   justify-content:center;
   align-items:center;
   background:rgba(0,0,0,0.92);
-  z-index:9999;
+  z-index:99999;
   flex-direction:column;
 }
 
 #cutscene img{
   width:240px;
-  border-radius:12px;
   animation:zoom 2.5s ease forwards;
   filter:drop-shadow(0 0 25px rgba(80,160,255,0.9));
 }
 
 @keyframes zoom{
-  0%{transform:scale(0.2);opacity:0;filter:blur(8px);}
+  0%{transform:scale(0.2);opacity:0;}
   50%{opacity:1;}
   100%{transform:scale(1.1);opacity:1;}
 }
@@ -169,17 +183,9 @@ button{
 .zig{
   margin-top:20px;
   font-size:14px;
-  letter-spacing:3px;
   color:#7fb2ff;
+  letter-spacing:3px;
   text-shadow:0 0 12px rgba(80,160,255,0.9);
-  animation:zig 2.5s ease forwards;
-}
-
-@keyframes zig{
-  0%{opacity:0;}
-  20%{opacity:1;}
-  80%{opacity:1;}
-  100%{opacity:0;}
 }
 </style>
 </head>
@@ -189,27 +195,24 @@ button{
 <div class="bg"></div>
 <div class="overlay"></div>
 
-<div class="wrapper">
+<!-- ENTRY -->
+<div id="entry">
+  <div class="entry-box">
+    <img src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif">
+    <button onclick="enter()">Entrar</button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="wrapper" id="main">
 
   <div class="card">
 
-    <div class="header">
-      <img class="logo" src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif">
-      <h1>Tempest Buxx</h1>
-      <div class="sub">Staff Application</div>
-    </div>
-
-    <!-- ===== SEU FORM COMPLETO (RESTAURADO) ===== -->
     <form id="form">
 
-      <label>Nome</label>
-      <input required>
-
-      <label>Usuário do Discord</label>
-      <input required>
-
-      <label>Idade</label>
-      <input type="number" required>
+      <label>Nome</label><input required>
+      <label>Usuário do Discord</label><input required>
+      <label>Idade</label><input type="number" required>
 
       <label>Há quanto tempo usa Discord?</label>
       <input>
@@ -244,7 +247,7 @@ button{
       <label>Fale sobre você</label>
       <textarea rows="4"></textarea>
 
-      <button type="submit">Enviar candidatura</button>
+      <button class="submit" type="submit">Enviar candidatura</button>
 
     </form>
 
@@ -252,49 +255,70 @@ button{
 
   <!-- PEZINHO -->
   <div class="benefits-footer">
-
     <div class="benefit">
-      <h3>Ambiente Profissional</h3>
-      Trabalhe em um ambiente organizado e com uma equipe incrível.
+      <h3>Ambiente</h3>
+      Organização e equipe.
     </div>
 
     <div class="benefit">
       <h3>Benefícios</h3>
-      Comissões exclusivas para equipe.
+      Comissões exclusivas.
     </div>
 
     <div class="benefit">
       <h3>Crescimento</h3>
-      Evolua junto com a Tempest Buxx.
+      Evolução constante.
     </div>
-
   </div>
 
 </div>
 
+<!-- LOGO -->
 <img class="corner-logo" src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif">
 
-<!-- CUTSCENE FINAL -->
+<!-- CUTSCENE -->
 <div id="cutscene">
   <img src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/LOGO.gif">
   <div class="zig">FEITO POR ZIG</div>
 </div>
 
-<audio id="snd">
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a6c8c5.mp3">
-</audio>
+<!-- SONS CORRIGIDOS -->
+<audio id="startSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a6c8c5.mp3"></audio>
+<audio id="clickSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_0a1f5d3c6b.mp3"></audio>
 
 <script>
-const form=document.getElementById("form");
-const cut=document.getElementById("cutscene");
-const snd=document.getElementById("snd");
+let unlocked=false;
 
-form.addEventListener("submit",(e)=>{
+const startSound=document.getElementById("startSound");
+const clickSound=document.getElementById("clickSound");
+
+function unlockAudio(){
+  const t=new Audio(startSound.src);
+  t.volume=0;
+  t.play().then(()=>{unlocked=true;}).catch(()=>{});
+}
+
+function play(a){
+  if(!unlocked) return;
+  a.currentTime=0;
+  a.volume=0.6;
+  a.play().catch(()=>{});
+}
+
+function enter(){
+  unlockAudio();
+  play(startSound);
+
+  document.getElementById("entry").style.display="none";
+  document.getElementById("main").style.display="flex";
+}
+
+document.getElementById("form").addEventListener("submit",(e)=>{
   e.preventDefault();
 
-  snd.play().catch(()=>{});
+  play(clickSound);
 
-  cut.style.display="flex";
+  document.getElementById("cutscene").style.display="flex";
 
   setTimeout(()=>{
     location.reload();
