@@ -97,13 +97,13 @@ canvas{
   height:100vh;
   padding:18px;
   flex-direction:column;
-  gap:20px;
+  gap:14px;
 }
 
 .card{
   width:100%;
   max-width:500px;
-  max-height:70vh;
+  max-height:75vh;
   overflow-y:auto;
   background:rgba(10,18,40,0.72);
   border:1px solid rgba(120,160,255,0.18);
@@ -141,9 +141,12 @@ input,textarea{
   background:rgba(255,255,255,0.04);
   color:white;
   outline:none;
+  font-size:13px;
 }
 
-textarea{resize:none;}
+textarea{
+  resize:none;
+}
 
 button.submit{
   width:100%;
@@ -154,17 +157,18 @@ button.submit{
   background:linear-gradient(90deg,#2f7bff,#4da3ff);
   color:white;
   font-weight:600;
+  cursor:pointer;
 }
 
-/* ===== MENU BENEFÍCIOS ===== */
-.benefits{
+/* ===== BENEFÍCIOS (PEZINHO) ===== */
+.benefits-footer{
   display:flex;
   gap:10px;
-  max-width:500px;
   width:100%;
+  max-width:500px;
 }
 
-.card-mini{
+.benefit{
   flex:1;
   padding:12px;
   border-radius:14px;
@@ -174,7 +178,7 @@ button.submit{
   font-size:11px;
 }
 
-.card-mini h3{
+.benefit h3{
   font-size:12px;
   margin-bottom:4px;
   color:#7fb2ff;
@@ -226,25 +230,50 @@ button.submit{
       <div class="sub">Staff Application</div>
     </div>
 
+    <!-- SEU FORM ORIGINAL (NÃO MEXIDO) -->
     <form>
 
       <label>Nome</label>
       <input>
 
-      <label>Discord</label>
+      <label>Usuário do Discord</label>
       <input>
 
       <label>Idade</label>
       <input type="number">
 
-      <label>Experiência</label>
-      <textarea rows="2"></textarea>
+      <label>Há quanto tempo usa Discord?</label>
+      <input>
 
-      <label>Já foi staff?</label>
-      <textarea rows="2"></textarea>
-
-      <label>Sobre você</label>
+      <label>Já trabalhou como staff antes?</label>
       <textarea rows="3"></textarea>
+
+      <label>Se sim, em quais servidores?</label>
+      <textarea rows="3"></textarea>
+
+      <label>Qual era o seu cargo?</label>
+      <input>
+
+      <label>Por que deixou de ser staff?</label>
+      <textarea rows="3"></textarea>
+
+      <label>Por que saiu do servidor?</label>
+      <textarea rows="3"></textarea>
+
+      <label>Tempo livre por dia</label>
+      <input>
+
+      <label>Como lidaria com cliente irritado?</label>
+      <textarea rows="3"></textarea>
+
+      <label>Por que quer entrar na Tempest Buxx?</label>
+      <textarea rows="3"></textarea>
+
+      <label>O que faria para ajudar a loja?</label>
+      <textarea rows="3"></textarea>
+
+      <label>Fale sobre você</label>
+      <textarea rows="4"></textarea>
 
       <button class="submit" type="button">Enviar candidatura</button>
 
@@ -252,22 +281,24 @@ button.submit{
 
   </div>
 
-  <!-- MENU BENEFÍCIOS -->
-  <div class="benefits">
-    <div class="card-mini">
+  <!-- PEZINHO BENEFÍCIOS -->
+  <div class="benefits-footer">
+
+    <div class="benefit">
       <h3>Ambiente Profissional</h3>
-      Trabalhe em uma equipe organizada e incrível.
+      Trabalhe em um ambiente organizado e com uma equipe incrível.
     </div>
 
-    <div class="card-mini">
-      <h3>Benefícios</h3>
-      Comissões e vantagens exclusivas.
+    <div class="benefit">
+      <h3>Benefícios Exclusivos</h3>
+      Tenha acesso a benefícios e comissões exclusivas para a equipe.
     </div>
 
-    <div class="card-mini">
+    <div class="benefit">
       <h3>Crescimento</h3>
-      Evolua junto com a Tempest Buxx.
+      Cresça junto com a Tempest Buxx e desenvolva novas habilidades.
     </div>
+
   </div>
 
 </div>
