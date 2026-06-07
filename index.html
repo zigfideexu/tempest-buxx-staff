@@ -29,12 +29,6 @@ body{
   filter:blur(18px) brightness(0.35);
   transform:scale(1.1);
   z-index:0;
-  animation:moveBg 14s ease-in-out infinite alternate;
-}
-
-@keyframes moveBg{
-  from{transform:scale(1.1) translateY(0);}
-  to{transform:scale(1.15) translateY(-10px);}
 }
 
 .overlay{
@@ -44,66 +38,21 @@ body{
   z-index:1;
 }
 
-canvas{
-  position:fixed;
-  inset:0;
-  z-index:2;
-}
-
-/* ENTRY */
-#entry{
-  position:fixed;
-  inset:0;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:999;
-  background:rgba(5,8,20,0.92);
-}
-
-.entry-box{
-  text-align:center;
-  padding:28px;
-  border-radius:18px;
-  background:rgba(10,18,40,0.6);
-  border:1px solid rgba(120,160,255,0.2);
-  box-shadow:0 0 40px rgba(0,120,255,0.15);
-}
-
-.entry-box img{
-  width:120px;
-  margin-bottom:10px;
-  border-radius:12px;
-  filter:drop-shadow(0 0 15px rgba(90,160,255,0.8));
-}
-
-.entry-btn{
-  padding:12px 22px;
-  border:none;
-  border-radius:12px;
-  background:linear-gradient(90deg,#2f7bff,#4da3ff);
-  color:white;
-  font-weight:600;
-  cursor:pointer;
-}
-
 /* MAIN */
 .wrapper{
   position:relative;
   z-index:3;
-  display:none;
+  display:flex;
   justify-content:center;
   align-items:center;
   height:100vh;
   padding:18px;
-  flex-direction:column;
-  gap:14px;
 }
 
 .card{
   width:100%;
   max-width:500px;
-  max-height:75vh;
+  max-height:80vh;
   overflow-y:auto;
   background:rgba(10,18,40,0.72);
   border:1px solid rgba(120,160,255,0.18);
@@ -141,14 +90,11 @@ input,textarea{
   background:rgba(255,255,255,0.04);
   color:white;
   outline:none;
-  font-size:13px;
 }
 
-textarea{
-  resize:none;
-}
+textarea{resize:none;}
 
-button.submit{
+button{
   width:100%;
   margin-top:14px;
   padding:12px;
@@ -160,39 +106,77 @@ button.submit{
   cursor:pointer;
 }
 
-/* ===== BENEFÍCIOS (PEZINHO) ===== */
-.benefits-footer{
-  display:flex;
-  gap:10px;
-  width:100%;
-  max-width:500px;
-}
-
-.benefit{
-  flex:1;
-  padding:12px;
-  border-radius:14px;
-  background:rgba(10,18,40,0.6);
-  border:1px solid rgba(120,160,255,0.18);
-  backdrop-filter:blur(10px);
-  font-size:11px;
-}
-
-.benefit h3{
-  font-size:12px;
-  margin-bottom:4px;
-  color:#7fb2ff;
-}
-
-/* LOGO CANTO */
-.corner-logo{
+/* ===== FINAL CUTSCENE ===== */
+#cutscene{
   position:fixed;
-  bottom:10px;
-  right:10px;
-  width:55px;
-  opacity:0.7;
-  z-index:10;
-  filter:drop-shadow(0 0 10px rgba(90,160,255,0.6));
+  inset:0;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  background:rgba(0,0,0,0.9);
+  z-index:9999;
+  overflow:hidden;
+}
+
+/* GIF vindo do fundo */
+#cutscene img{
+  width:260px;
+  border-radius:14px;
+  animation:zoomIn 2.5s ease forwards;
+  filter:drop-shadow(0 0 30px rgba(80,160,255,0.9));
+}
+
+@keyframes zoomIn{
+  0%{transform:scale(0.2); opacity:0; filter:blur(10px);}
+  40%{opacity:1;}
+  100%{transform:scale(1.1); opacity:1;}
+}
+
+/* raio azul */
+#cutscene::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at center, rgba(80,160,255,0.25), transparent 60%);
+  animation:pulse 1s infinite;
+}
+
+@keyframes pulse{
+  0%{opacity:0.2;}
+  50%{opacity:0.6;}
+  100%{opacity:0.2;}
+}
+
+/* TEXTO FEITO POR ZIG */
+.zig{
+  position:absolute;
+  bottom:18%;
+  font-size:14px;
+  letter-spacing:3px;
+  color:#7fb2ff;
+  text-shadow:0 0 10px rgba(80,160,255,0.8);
+  animation:zigAnim 2.5s ease forwards;
+}
+
+@keyframes zigAnim{
+  0%{opacity:0; transform:translateY(10px);}
+  20%{opacity:1;}
+  80%{opacity:1;}
+  100%{opacity:0; transform:translateY(-10px);}
+}
+
+/* SUCCESS TEXT */
+.success{
+  position:absolute;
+  top:65%;
+  font-size:13px;
+  opacity:0;
+  animation:show 2.5s ease forwards;
+  animation-delay:1s;
+}
+
+@keyframes show{
+  to{opacity:1;}
 }
 </style>
 </head>
@@ -201,26 +185,8 @@ button.submit{
 
 <div class="bg"></div>
 <div class="overlay"></div>
-<canvas id="particles"></canvas>
 
-<!-- ENTRY -->
-<div id="entry">
-  <div class="entry-box">
-    <img src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif">
-    <button class="entry-btn" onclick="enterSite()">Entrar</button>
-  </div>
-</div>
-
-<audio id="startSound">
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a6c8c5.mp3">
-</audio>
-
-<audio id="clickSound">
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_0a1f5d3c6b.mp3">
-</audio>
-
-<!-- MAIN -->
-<div class="wrapper" id="main">
+<div class="wrapper">
 
   <div class="card">
 
@@ -230,134 +196,61 @@ button.submit{
       <div class="sub">Staff Application</div>
     </div>
 
-    <!-- SEU FORM ORIGINAL (NÃO MEXIDO) -->
-    <form>
+    <form id="form">
 
       <label>Nome</label>
-      <input>
+      <input required>
 
-      <label>Usuário do Discord</label>
-      <input>
+      <label>Discord</label>
+      <input required>
 
       <label>Idade</label>
-      <input type="number">
+      <input type="number" required>
 
-      <label>Há quanto tempo usa Discord?</label>
-      <input>
-
-      <label>Já trabalhou como staff antes?</label>
+      <label>Experiência</label>
       <textarea rows="3"></textarea>
 
-      <label>Se sim, em quais servidores?</label>
-      <textarea rows="3"></textarea>
-
-      <label>Qual era o seu cargo?</label>
-      <input>
-
-      <label>Por que deixou de ser staff?</label>
-      <textarea rows="3"></textarea>
-
-      <label>Por que saiu do servidor?</label>
-      <textarea rows="3"></textarea>
-
-      <label>Tempo livre por dia</label>
-      <input>
-
-      <label>Como lidaria com cliente irritado?</label>
-      <textarea rows="3"></textarea>
-
-      <label>Por que quer entrar na Tempest Buxx?</label>
-      <textarea rows="3"></textarea>
-
-      <label>O que faria para ajudar a loja?</label>
-      <textarea rows="3"></textarea>
-
-      <label>Fale sobre você</label>
-      <textarea rows="4"></textarea>
-
-      <button class="submit" type="button">Enviar candidatura</button>
+      <button type="submit">Enviar candidatura</button>
 
     </form>
 
   </div>
 
-  <!-- PEZINHO BENEFÍCIOS -->
-  <div class="benefits-footer">
+</div>
 
-    <div class="benefit">
-      <h3>Ambiente Profissional</h3>
-      Trabalhe em um ambiente organizado e com uma equipe incrível.
-    </div>
+<!-- CUTSCENE -->
+<div id="cutscene">
 
-    <div class="benefit">
-      <h3>Benefícios Exclusivos</h3>
-      Tenha acesso a benefícios e comissões exclusivas para a equipe.
-    </div>
+  <img src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/LOGO.gif">
 
-    <div class="benefit">
-      <h3>Crescimento</h3>
-      Cresça junto com a Tempest Buxx e desenvolva novas habilidades.
-    </div>
+  <div class="zig">FEITO POR ZIG</div>
 
-  </div>
+  <div class="success">Candidatura enviada com sucesso</div>
 
 </div>
 
-<!-- LOGO CANTO -->
-<img class="corner-logo" src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif">
+<audio id="snd">
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a6c8c5.mp3">
+</audio>
 
 <script>
-function enterSite(){
-  document.getElementById("startSound").play().catch(()=>{});
-  document.getElementById("entry").style.display="none";
-  document.getElementById("main").style.display="flex";
-}
+const form=document.getElementById("form");
+const cut=document.getElementById("cutscene");
+const snd=document.getElementById("snd");
 
-const click=document.getElementById("clickSound");
-document.querySelectorAll("input,textarea").forEach(el=>{
-  el.addEventListener("focus",()=>{
-    click.currentTime=0;
-    click.play().catch(()=>{});
-  });
+form.addEventListener("submit",(e)=>{
+  e.preventDefault();
+
+  snd.volume=0.6;
+  snd.play().catch(()=>{});
+
+  cut.style.display="flex";
+
+  setTimeout(()=>{
+    cut.style.display="none";
+    location.reload();
+  },2500);
 });
-
-/* particles */
-const c=document.getElementById("particles");
-const x=c.getContext("2d");
-
-c.width=innerWidth;
-c.height=innerHeight;
-
-let p=[];
-for(let i=0;i<50;i++){
-  p.push({
-    x:Math.random()*c.width,
-    y:Math.random()*c.height,
-    r:Math.random()*1.2,
-    dx:(Math.random()-0.5)*0.3,
-    dy:(Math.random()-0.5)*0.3
-  });
-}
-
-function anim(){
-  x.clearRect(0,0,c.width,c.height);
-  x.fillStyle="rgba(120,160,255,0.35)";
-
-  p.forEach(e=>{
-    x.beginPath();
-    x.arc(e.x,e.y,e.r,0,Math.PI*2);
-    x.fill();
-
-    e.x+=e.dx;
-    e.y+=e.dy;
-
-    if(e.x<0||e.x>c.width)e.dx*=-1;
-    if(e.y<0||e.y>c.height)e.dy*=-1;
-  });
-
-  requestAnimationFrame(anim);
-}
-anim();
 </script>
 
 </body>
