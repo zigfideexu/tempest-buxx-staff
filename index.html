@@ -3,330 +3,225 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tempest Buxx Form</title>
+<title>Tempest Buxx • Formulário Esgotado</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:"Plus Jakarta Sans",sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
 body{
-  background:#050814;
-  overflow:hidden;
-  color:#e8f1ff;
+    overflow:hidden;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#050814;
+    color:white;
+    font-family:"Plus Jakarta Sans",sans-serif;
 }
 
+/* Fundo */
 .bg{
-  position:fixed;
-  inset:0;
-  background:url("https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif") center/cover no-repeat;
-  filter:blur(18px) brightness(0.35);
-  transform:scale(1.1);
-  z-index:0;
+    position:fixed;
+    inset:0;
+    background:url("https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif") center/cover no-repeat;
+    filter:blur(22px) brightness(.25);
+    transform:scale(1.2);
 }
 
 .overlay{
-  position:fixed;
-  inset:0;
-  background:radial-gradient(circle,#0a1a3a88,#050814 70%);
-  z-index:1;
+    position:fixed;
+    inset:0;
+    background:
+    radial-gradient(circle at center,
+    rgba(60,120,255,.15),
+    rgba(5,8,20,.95));
 }
 
-/* ENTRY */
-#entry{
-  position:fixed;
-  inset:0;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:rgba(0,0,0,0.92);
-  z-index:9999;
+/* Partículas */
+.stars{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
 }
 
-.entry-box img{
-  width:150px;
-  filter:drop-shadow(0 0 25px rgba(80,160,255,0.9));
+.star{
+    position:absolute;
+    width:3px;
+    height:3px;
+    background:white;
+    border-radius:50%;
+    animation:float 8s linear infinite;
+    opacity:.6;
 }
 
-.entry-box button{
-  margin-top:12px;
-  padding:10px 20px;
-  border:none;
-  border-radius:10px;
-  background:linear-gradient(90deg,#2f7bff,#4da3ff);
-  color:white;
-  font-weight:600;
-  cursor:pointer;
+@keyframes float{
+    from{
+        transform:translateY(100vh);
+    }
+    to{
+        transform:translateY(-100px);
+    }
 }
 
-/* WRAPPER */
-.wrapper{
-  display:none;
-  position:relative;
-  z-index:3;
-  height:100vh;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  gap:10px;
-  padding:15px;
-}
-
-/* CARD */
+/* Card */
 .card{
-  width:100%;
-  max-width:520px;
-  max-height:75vh;
-  overflow-y:auto;
-  background:rgba(10,18,40,0.72);
-  border:1px solid rgba(120,160,255,0.18);
-  border-radius:18px;
-  padding:20px;
-  backdrop-filter:blur(14px);
+    position:relative;
+    z-index:10;
+
+    width:min(92%,750px);
+
+    text-align:center;
+
+    padding:45px;
+
+    background:rgba(10,18,40,.55);
+    border:1px solid rgba(120,160,255,.15);
+
+    backdrop-filter:blur(18px);
+
+    border-radius:28px;
+
+    box-shadow:
+    0 0 60px rgba(77,163,255,.12);
+
+    animation:cardAppear 2s ease forwards;
 }
 
-.form-header{
-  text-align:center;
+@keyframes cardAppear{
+    from{
+        opacity:0;
+        transform:translateY(40px) scale(.95);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
 }
 
-.form-header img{
-  width:90px;
-  margin-bottom:10px;
-  filter:drop-shadow(0 0 20px rgba(80,160,255,0.9));
+.logo{
+    width:170px;
+
+    filter:drop-shadow(0 0 30px rgba(77,163,255,.7));
+
+    animation:logoZoom 4s ease infinite alternate;
 }
 
-.form-title{
-  text-align:center;
-  margin:10px 0;
-  color:#7fb2ff;
-  font-size:14px;
-  letter-spacing:2px;
+@keyframes logoZoom{
+    from{
+        transform:scale(1);
+    }
+    to{
+        transform:scale(1.08);
+    }
 }
 
-label{
-  display:block;
-  margin-top:12px;
-  font-size:12px;
+.title{
+    margin-top:25px;
+
+    font-family:"Cinzel",serif;
+
+    font-size:clamp(30px,5vw,52px);
+
+    color:white;
+
+    letter-spacing:2px;
+
+    text-shadow:
+    0 0 25px rgba(77,163,255,.4);
+
+    animation:fadeIn 2s ease;
 }
 
-input,textarea{
-  width:100%;
-  margin-top:6px;
-  padding:11px;
-  border-radius:10px;
-  border:1px solid rgba(120,160,255,0.18);
-  background:rgba(255,255,255,0.04);
-  color:white;
-  outline:none;
+.message{
+    margin-top:25px;
+
+    line-height:1.9;
+
+    font-size:17px;
+
+    color:#d8e8ff;
+
+    animation:fadeIn 3s ease;
 }
 
-button.submit{
-  width:100%;
-  margin-top:15px;
-  padding:12px;
-  border:none;
-  border-radius:12px;
-  background:linear-gradient(90deg,#2f7bff,#4da3ff);
-  color:white;
-  font-weight:600;
-  cursor:pointer;
+.highlight{
+    color:#7fb2ff;
+    font-weight:700;
 }
 
-/* CUTSCENE */
-#cutscene{
-  position:fixed;
-  inset:0;
-  display:none;
-  justify-content:center;
-  align-items:center;
-  background:rgba(0,0,0,0.92);
-  z-index:99999;
-  flex-direction:column;
+.signature{
+    margin-top:35px;
+
+    font-family:"Cinzel",serif;
+
+    letter-spacing:6px;
+
+    color:#7fb2ff;
+
+    opacity:.8;
 }
 
-#cutscene img{
-  width:220px;
-}
-
-.zig{
-  margin-top:15px;
-  color:#7fb2ff;
+@keyframes fadeIn{
+    from{
+        opacity:0;
+    }
+    to{
+        opacity:1;
+    }
 }
 </style>
 </head>
-
 <body>
 
 <div class="bg"></div>
 <div class="overlay"></div>
 
-<!-- ENTRY -->
-<div id="entry">
-  <div class="entry-box">
-    <img src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif">
-    <br>
-    <button onclick="enter()">Entrar</button>
-  </div>
+<div class="stars">
+    <span class="star" style="left:10%;animation-delay:0s"></span>
+    <span class="star" style="left:20%;animation-delay:1s"></span>
+    <span class="star" style="left:35%;animation-delay:2s"></span>
+    <span class="star" style="left:50%;animation-delay:3s"></span>
+    <span class="star" style="left:65%;animation-delay:4s"></span>
+    <span class="star" style="left:80%;animation-delay:5s"></span>
+    <span class="star" style="left:90%;animation-delay:6s"></span>
 </div>
 
-<!-- MAIN -->
-<div class="wrapper" id="main">
+<div class="card">
 
-  <div class="card">
+    <img
+    class="logo"
+    src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif">
 
-    <div class="form-header">
-      <img src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif">
+    <div class="title">
+        FORMULÁRIO ESGOTADO
     </div>
 
-    <div class="form-title">FORMULÁRIO DE STAFF TEMPEST-BUXX</div>
+    <div class="message">
+        Os formulários foram um verdadeiro sucesso e as inscrições
+        encontram-se oficialmente encerradas.
+        <br><br>
+        A equipe da <span class="highlight">Tempest Buxx</span>
+        agradece sinceramente a todos que participaram,
+        dedicaram seu tempo e demonstraram interesse em fazer
+        parte deste projeto.
+        <br><br>
+        Cada candidatura foi importante para nós.
+        Muito obrigado por todo o apoio, confiança e carinho. 💙
+        <br><br>
+        Esperamos vê-los novamente em futuras oportunidades.
+    </div>
 
-    <form id="form">
-
-      <label>Nome</label>
-      <input required>
-
-      <label>Discord (nick)</label>
-      <input required>
-
-      <label>Idade</label>
-      <input type="number" required>
-
-      <label>A quanto tempo usa Discord?</label>
-      <input>
-
-      <label>Você já trabalhou como staff antes?</label>
-      <textarea></textarea>
-
-      <label>O que você faria se visse alguém burlando regras sem provas claras?</label>
-      <textarea></textarea>
-
-      <label>Qual era seu cargo anterior?</label>
-      <input>
-
-      <label>Por que você saiu do cargo de staff?</label>
-      <textarea></textarea>
-
-      <label>Um amigo seu quebra as regras. Você pune ou ignora</label>
-      <textarea></textarea>
-
-      <label>Quanto tempo livre você tem por dia?</label>
-      <input>
-
-      <label>Como você lidaria com um cliente irritado?</label>
-      <textarea></textarea>
-
-      <label>Por que você quer entrar na Tempest Buxx?</label>
-      <textarea></textarea>
-
-      <label>O que você faria para ajudar a loja a crescer?</label>
-      <textarea></textarea>
-
-      <label>Você acha certo dar segunda chance? Quando?</label>
-      <textarea></textarea>
-
-      <button class="submit" type="submit">Enviar candidatura</button>
-
-    </form>
-
-  </div>
+    <div class="signature">
+        TEMPEST BUXX
+    </div>
 
 </div>
-
-<!-- CUTSCENE -->
-<div id="cutscene">
-  <img src="https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/LOGO.gif">
-  <div class="zig">Tempest & zig</div>
-</div>
-
-<script>
-function enter(){
-  document.getElementById("entry").style.display = "none";
-  document.getElementById("main").style.display = "flex";
-}
-
-window.onload = function(){
-  document.getElementById("main").style.display = "none";
-  document.getElementById("entry").style.display = "flex";
-};
-
-const WEBHOOK_URL = "https://discord.com/api/webhooks/1513258348999475220/31m4hKbZnA68rMceZFK3ycvBWJ2mXXZFhYo-1N8YRWyDqdVJOj301lfk5ACA_S29e8xr";
-
-const safe = (v) => v ? v.toString().trim().slice(0,1000) : "N/A";
-
-document.getElementById("form").addEventListener("submit", async (e)=>{
-  e.preventDefault();
-
-  const inputs = document.querySelectorAll("input");
-  const texts = document.querySelectorAll("textarea");
-
-  const payload = {
-    content: "📩 Nova candidatura recebida!",
-    embeds: [{
-      color: 0x4da3ff,
-      title: "Tempest Buxx • Recrutamento",
-
-      image: {
-        url: "https://raw.githubusercontent.com/zigfideexu/tempest-buxx-staff/refs/heads/main/20260527_222655.gif"
-      },
-
-      fields: [
-        {
-          name: "Identificação",
-          value:
-`Nome: ${safe(inputs[0]?.value)}
-Discord: ${safe(inputs[1]?.value)}
-Idade: ${safe(inputs[2]?.value)}
-Tempo no dc: ${safe(inputs[3]?.value)}`
-        },
-        {
-          name: "Experiência",
-          value:
-`Staff: ${safe(texts[0]?.value)}
-Burlando regras sem provas: ${safe(texts[1]?.value)}
-Cargo anterior: ${safe(inputs[4]?.value)}`
-        },
-        {
-          name: "Histórico",
-          value:
-`Saiu staff: ${safe(texts[2]?.value)}
-Punimento amigo: ${safe(texts[3]?.value)}`
-        },
-        {
-          name: "Situação",
-          value: safe(texts[4]?.value)
-        },
-        {
-          name: "Motivação",
-          value:
-`Tempo livre por dia: ${safe(texts[5]?.value)}
-O que faria com um cliente irritado: ${safe(texts[6]?.value)}
-Sobre: ${safe(texts[7]?.value)}`
-        }
-      ],
-
-      footer: {
-        text: "Tempest Buxx • Sistema automático"
-      },
-
-      timestamp: new Date().toISOString()
-    }]
-  };
-
-  await fetch(WEBHOOK_URL, {
-    method: "POST",
-    headers: {"Content-Type":"application/json"},
-    body: JSON.stringify(payload)
-  });
-
-  document.getElementById("cutscene").style.display="flex";
-  setTimeout(()=>location.reload(),2500);
-});
-</script>
 
 </body>
 </html>
